@@ -1,39 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbf5a28x61djd"]
+[gd_scene load_steps=3 format=3 uid="uid://bbf5a28x61djd"]
 
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_bgtii"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vui4c"]
-size = Vector2(112, 80)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y5p2n"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_687w7"]
-size = Vector2(86, 60)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ynh48"]
+[ext_resource type="PackedScene" uid="uid://ri4jdx8dnjod" path="res://character_body_2d.tscn" id="1_ov04i"]
+[ext_resource type="PackedScene" uid="uid://d3gh5mqi3a858" path="res://static_body_2d.tscn" id="2_p8s1k"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(159, 49)
-script = ExtResource("1_bgtii")
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_ov04i")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_vui4c")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(6.28829e-06, 0)
-scale = Vector2(112, 80)
-texture = SubResource("PlaceholderTexture2D_y5p2n")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(166, 187)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_687w7")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(86, 62)
-texture = SubResource("PlaceholderTexture2D_ynh48")
+[node name="StaticBody2D" parent="." instance=ExtResource("2_p8s1k")]
