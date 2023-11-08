@@ -53,7 +53,7 @@ func _physics_process(delta):
 		if moveTime >= 100:
 			moveTime = 0
 		moveTime += 1 * deltaTime
-		velocity.x += direction * 175 * deltaTime
+		velocity.x += direction * 150 * deltaTime
 		dashCooldown = 3000
 
 	move_and_slide()

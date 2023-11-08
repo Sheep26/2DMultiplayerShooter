@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddoa8yw58lf23"]
 
-[ext_resource type="Script" path="res://SingleplayerButton.gd" id="1_mj75t"]
+[ext_resource type="Script" path="res://Scripts/SingleplayerButton.gd" id="1_8oixk"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -39,4 +39,4 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Singleplayer"
-script = ExtResource("1_mj75t")
+script = ExtResource("1_8oixk")
