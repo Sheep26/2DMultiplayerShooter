@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://b2q6ir6a5gdm2"]
+[gd_scene load_steps=3 format=3 uid="uid://bbf5a28x61djd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vui4c"]
+size = Vector2(112, 80)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y5p2n"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(60, 51)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_vui4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(6.28829e-06, 0)
+scale = Vector2(112, 80)
+texture = SubResource("PlaceholderTexture2D_y5p2n")
