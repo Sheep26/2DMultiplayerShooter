@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Scripts/CharacterBody2D.gd" id="1_kpffx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vui4c"]
-size = Vector2(112, 80)
+size = Vector2(150, 102)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y5p2n"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(159, 49)
+position = Vector2(562, 246)
 script = ExtResource("1_kpffx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -16,7 +16,8 @@ shape = SubResource("RectangleShape2D_vui4c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(6.28829e-06, 0)
-scale = Vector2(112, 80)
+scale = Vector2(150, 102)
 texture = SubResource("PlaceholderTexture2D_y5p2n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
