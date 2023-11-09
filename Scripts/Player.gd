@@ -7,11 +7,11 @@ const JUMPS = 2
 var jumpAmount = 2
 var dashCooldown = 0
 var deltaTime = 1
-var lastTime = Time.get_ticks_msec()
 var moveTime = 1000
 var health = 100
 var was_on_floor
 @onready var coyoteTimer = $Timer
+@onready var lastTime = Time.get_ticks_msec()
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -69,7 +69,7 @@ func _physics_process(delta):
 		if moveTime >= 100:
 			moveTime = 0
 		moveTime += 1 * deltaTime
-		velocity.x += direction * 150 * deltaTime
+		velocity.x += direction * 175 * deltaTime
 		dashCooldown = 3000
 
 	move_and_slide()
