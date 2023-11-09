@@ -8,10 +8,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	look_at(get_global_mouse_position())
+	var angle = get_angle_to(get_global_mouse_position())
+	var angle2Vector2 = Vector2(cos(rad_to_deg(angle)), sin(rad_to_deg(angle)))
+	print (angle2Vector2)
+	rotate(angle)
 	if Input.is_action_just_pressed("fire"):
 		var bullet_instantiated = bullet.instantiate()
 		bullet_instantiated.set("rotation", rotation)
-		bullet_instantiated.set("position.x", position.x)
-		bullet_instantiated.set("position.y", position.y)
+		bullet_instantiated.position = position + get_parent().position +  angle2Vector2 * 94
 		get_tree().current_scene.add_child(bullet_instantiated)
