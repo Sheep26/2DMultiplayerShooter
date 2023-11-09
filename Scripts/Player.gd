@@ -15,16 +15,19 @@ var was_on_floor
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 func _jump(onFloor, jumps):
 	if not onFloor and coyoteTimer.is_stopped():
 		jumps -= 1
 	velocity.y = JUMP_VELOCITY
 	jumps -= 1
 	return jumps
+	
 func _coyoteTime(on_floor):
 	if was_on_floor and not on_floor:
 		coyoteTimer.start()
 	was_on_floor = on_floor
+	
 func _draw():
 	if dashCooldown > 0:
 		draw_string(Control.new().get_theme_font("Arial"), Vector2(-float(get_window().size.x)/2 + 10, -float(get_window().size.y)/2 + 20), "Dash: " + str(round(float(dashCooldown) / 1000)))
@@ -35,16 +38,20 @@ func _process(_delta):
 func _physics_process(delta):
 	# Calculate Deltatime
 	deltaTime = Time.get_ticks_msec() - lastTime
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
 		jumpAmount = JUMPS
-	# Calls coyote time function 
+		
+	# Handles the coyote Time
 	_coyoteTime(is_on_floor())
+	
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and jumpAmount > 0:
 		jumpAmount = _jump(is_on_floor(), jumpAmount)
+		
 	#The input direction
 	var direction = Input.get_axis("left", "right")
 
