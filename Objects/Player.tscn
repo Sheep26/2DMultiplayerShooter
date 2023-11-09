@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ri4jdx8dnjod"]
+[gd_scene load_steps=5 format=3 uid="uid://ri4jdx8dnjod"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_yc2jy"]
 [ext_resource type="Texture2D" uid="uid://7ebqfnx0ssx5" path="res://Assets/player.png" id="2_4p3dw"]
+[ext_resource type="PackedScene" uid="uid://bt5cdnr1s1w3v" path="res://Objects/Gun.tscn" id="3_c48so"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vui4c"]
 size = Vector2(88, 160)
@@ -26,3 +27,6 @@ visible = false
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.175
 one_shot = true
+
+[node name="Gun" parent="." instance=ExtResource("3_c48so")]
+position = Vector2(-3, -24)
