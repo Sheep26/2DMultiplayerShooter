@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddoa8yw58lf23"]
 
 [ext_resource type="Script" path="res://Scripts/SingleplayerButton.gd" id="1_8oixk"]
-[ext_resource type="Script" path="res://Scenes/MainMenu/MultiplayerButton.gd" id="2_wiqva"]
+[ext_resource type="Script" path="res://Scripts/MultiplayerButton.gd" id="2_ymcor"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -55,4 +55,4 @@ offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Multiplayer"
-script = ExtResource("2_wiqva")
+script = ExtResource("2_ymcor")
