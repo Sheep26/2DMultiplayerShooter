@@ -9,7 +9,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var angle = get_angle_to(get_global_mouse_position())
-	var angle2Vector2 = Vector2(cos(rad_to_deg(angle)), sin(rad_to_deg(angle)))
+	var angle2Vector2 = Vector2(cos(deg_to_rad(rotation_degrees)), sin(deg_to_rad(rotation_degrees)))
 	print (angle2Vector2)
 	rotate(angle)
 	if Input.is_action_just_pressed("fire"):
