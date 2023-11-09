@@ -13,5 +13,5 @@ func _process(_delta):
 	if Input.is_action_just_pressed("fire"):
 		var bullet_instantiated = bullet.instantiate()
 		bullet_instantiated.rotation = rotation
-		bullet_instantiated.position = position + get_parent().position +  rotationToVector2 * 94
+		bullet_instantiated.position = position + get_parent().position + rotationToVector2 * 94
 		get_tree().current_scene.add_child(bullet_instantiated)
