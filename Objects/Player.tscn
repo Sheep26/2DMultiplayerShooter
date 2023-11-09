@@ -15,9 +15,14 @@ position = Vector2(-6, 1)
 shape = SubResource("RectangleShape2D_vui4c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(6.28829e-06, 0)
 scale = Vector2(4.8125, 6.5625)
 texture = ExtResource("2_4p3dw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.175
+one_shot = true

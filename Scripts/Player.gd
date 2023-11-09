@@ -3,16 +3,28 @@ extends CharacterBody2D
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -475.0
-var jumped = false
+const JUMPS = 2
+var jumpAmount = 2
 var dashCooldown = 0
 var deltaTime = 1
 var lastTime = Time.get_ticks_msec()
 var moveTime = 1000
 var health = 100
+var was_on_floor
+@onready var coyoteTimer = $Timer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+func _jump(onFloor, jumps):
+	if not onFloor and coyoteTimer.is_stopped():
+		jumps -= 1
+	velocity.y = JUMP_VELOCITY
+	jumps -= 1
+	return jumps
+func _coyoteTime(on_floor):
+	if was_on_floor and not on_floor:
+		coyoteTimer.start()
+	was_on_floor = on_floor
 func _draw():
 	if dashCooldown > 0:
 		draw_string(Control.new().get_theme_font("Arial"), Vector2(-float(get_window().size.x)/2 + 10, -float(get_window().size.y)/2 + 20), "Dash: " + str(round(float(dashCooldown) / 1000)))
@@ -26,16 +38,13 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	else:
+		jumpAmount = JUMPS
+	# Calls coyote time function 
+	_coyoteTime(is_on_floor())
 	# Handle Jump.
-	if is_on_floor():
-		jumped = false
-		
-	if Input.is_action_just_pressed("jump") and ((is_on_floor() or not jumped) or (not is_on_floor() and not jumped)):
-		velocity.y = JUMP_VELOCITY
-		if not is_on_floor():
-			jumped = true
-			
+	if Input.is_action_just_pressed("jump") and jumpAmount > 0:
+		jumpAmount = _jump(is_on_floor(), jumpAmount)
 	#The input direction
 	var direction = Input.get_axis("left", "right")
 
