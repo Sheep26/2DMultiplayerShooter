@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddoa8yw58lf23"]
+[gd_scene load_steps=4 format=3 uid="uid://ddoa8yw58lf23"]
 
 [ext_resource type="Script" path="res://Scripts/SingleplayerButton.gd" id="1_8oixk"]
 [ext_resource type="Script" path="res://Scripts/MultiplayerButton.gd" id="2_ymcor"]
+[ext_resource type="Script" path="res://Scripts/SettingsButton.gd" id="3_q2w2h"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -56,3 +57,18 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Multiplayer"
 script = ExtResource("2_ymcor")
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 51.0
+offset_right = 35.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+script = ExtResource("3_q2w2h")
