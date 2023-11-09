@@ -12,7 +12,7 @@ func _process(_delta):
 	
 func _button_pressed():
 	get_tree().current_scene.queue_free()
-	var s = ResourceLoader.load("res://Scenes/Levels/node_2d.tscn")
+	var s = ResourceLoader.load("res://Scenes/Levels/Level1.tscn")
 	var new = s.instantiate()
 	get_tree().root.add_child(new)
 	get_tree().current_scene = new
