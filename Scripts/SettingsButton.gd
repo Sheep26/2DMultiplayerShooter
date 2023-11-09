@@ -10,4 +10,8 @@ func _process(_delta):
 	pass
 
 func _button_pressed():
-	pass
+	get_tree().current_scene.queue_free()
+	var s = ResourceLoader.load("res://Scenes/MainMenu/Settings/Settings.tscn")
+	var new = s.instantiate()
+	get_tree().root.add_child(new)
+	get_tree().current_scene = new
