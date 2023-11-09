@@ -14,5 +14,4 @@ func _process(_delta):
 		bullet_instantiated.set("rotation", rotation)
 		bullet_instantiated.set("position.x", position.x)
 		bullet_instantiated.set("position.y", position.y)
-		current_bullets.append(bullet_instantiated)
 		get_tree().current_scene.add_child(bullet_instantiated)
