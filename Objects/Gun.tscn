@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://bt5cdnr1s1w3v"]
 
 [ext_resource type="Script" path="res://Scripts/Gun.gd" id="1_1qryo"]
-[ext_resource type="Texture2D" uid="uid://1v6dm1d4ck68" path="res://Assets/shotgun.png" id="1_23tap"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yjc33"]
 
 [node name="Gun" type="Node2D"]
 position = Vector2(851, 233)
 script = ExtResource("1_1qryo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.192616, 0.181818)
-texture = ExtResource("1_23tap")
-centered = false
-offset = Vector2(0, -66)
+position = Vector2(48, 0)
+scale = Vector2(93.9999, 22)
+texture = SubResource("PlaceholderTexture2D_yjc33")

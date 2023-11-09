@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlldbh1qwd8bk"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_vhskc"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b4ln5"]
+
+[node name="Bullet" type="Node2D"]
+position = Vector2(6, 5)
+script = ExtResource("1_vhskc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8.5, 2.5)
+scale = Vector2(27, 7)
+texture = SubResource("PlaceholderTexture2D_b4ln5")
