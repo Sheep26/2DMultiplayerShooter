@@ -5,4 +5,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	var rotationToVector2 = Vector2(cos(rotation), sin(rotation))
+	position.x += rotationToVector2.x * 10
+	position.y += rotationToVector2.y * 10
