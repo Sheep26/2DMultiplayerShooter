@@ -1,28 +1,35 @@
 extends CharacterBody2D
 
 
-const SPEED = 500.0
+const TOP_SPEED = 0.1
 const JUMP_VELOCITY = -475.0
 const JUMPS = 2
+const SPEED_CHANGES_PER_SECOND = 5.0
 var jumpAmount = 2
 var dashCooldown = 0
 var deltaTime = 1
 var moveTime = 1000
 var health = 100
 var was_on_floor
-@onready var coyoteTimer = $Timer
+var currentSpeed = 1
+var speedChange = 0.0
+@onready var coyoteTimer = $CoyoteTimer
+@onready var speedChangeTimer = $SpeedChange
 @onready var lastTime = Time.get_ticks_msec()
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+func _accelerationAndMovement(direction, speedChange):
+	if speedChange >= TOP_SPEED:
+		velocity.x = direction * TOP_SPEED
+	velocity.x = direction * speedChange
+	return velocity.x
 func _jump(onFloor, jumps):
 	if not onFloor and coyoteTimer.is_stopped():
 		jumps -= 1
 	velocity.y = JUMP_VELOCITY
 	jumps -= 1
 	return jumps
-	
 func _coyoteTime(on_floor):
 	if was_on_floor and not on_floor:
 		coyoteTimer.start()
@@ -34,7 +41,8 @@ func _draw():
 		
 func _process(_delta):
 	queue_redraw()
-
+func _ready():
+	speedChangeTimer.set_wait_time(1/SPEED_CHANGES_PER_SECOND)
 func _physics_process(delta):
 	# Calculate Deltatime
 	deltaTime = Time.get_ticks_msec() - lastTime
@@ -56,10 +64,10 @@ func _physics_process(delta):
 	var direction = Input.get_axis("left", "right")
 
 	# Handle movement
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	if direction: 
+		speedChange = currentSpeed * 1.2
+		currentSpeed = _accelerationAndMovement(direction, speedChange)
 	
 	# Handle dash
 	if dashCooldown > 0:

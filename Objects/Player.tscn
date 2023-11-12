@@ -24,9 +24,12 @@ texture = ExtResource("2_4p3dw")
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
 
-[node name="Timer" type="Timer" parent="."]
+[node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.175
 one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("3_c48so")]
 position = Vector2(-3, -24)
+
+[node name="SpeedChange" type="Timer" parent="."]
+one_shot = true
