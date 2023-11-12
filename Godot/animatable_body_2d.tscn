@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://cytk5pfsy20ia"]
+
+[ext_resource type="Script" path="res://AnimatableBody2D.gd" id="1_jefn6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jn6ji"]
+size = Vector2(130.625, 60)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_13gul"]
+
+[sub_resource type="Animation" id="Animation_5benv"]
+resource_name = "platform"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(506, 152), Vector2(240, 147), Vector2(506, 152)]
+}
+
+[sub_resource type="Animation" id="Animation_tuo5m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 150)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_deman"]
+_data = {
+"RESET": SubResource("Animation_tuo5m"),
+"platform": SubResource("Animation_5benv")
+}
+
+[node name="Platform1" type="AnimatableBody2D"]
+position = Vector2(0, 150)
+script = ExtResource("1_jefn6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(187.688, 99)
+shape = SubResource("RectangleShape2D_jn6ji")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(187, 97)
+scale = Vector2(-137, 63)
+texture = SubResource("PlaceholderTexture2D_13gul")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_deman")
+}
