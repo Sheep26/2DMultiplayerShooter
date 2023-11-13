@@ -26,4 +26,3 @@ texture = SubResource("PlaceholderTexture2D_dfd53")
 [node name="MovingPlatform" parent="." instance=ExtResource("2_y0v4r")]
 position = Vector2(769, 140)
 scale = Vector2(0.05, 0.05)
-speed = 10

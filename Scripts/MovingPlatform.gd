@@ -1,14 +1,14 @@
 extends StaticBody2D
 
-@export var speed:int
-@export var addX:int
-@export var addY:int
-var startX:int
-var startY:int
+@export var speed:float
+@export var addX:float
+@export var addY:float
+var startX:float
+var startY:float
 
 func _ready():
 	startX = position.x
 	startY = position.y
 
-func _process(delta):
+func _process(_delta):
 	pass
