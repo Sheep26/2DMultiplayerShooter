@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const TOP_SPEED = 0.1
+const TOP_SPEED = 400.0
 const JUMP_VELOCITY = -475.0
 const JUMPS = 2
 const SPEED_CHANGES_PER_SECOND = 5.0
@@ -12,7 +12,6 @@ var moveTime = 1000
 var health = 100
 var was_on_floor
 var currentSpeed = 1
-var speedChange = 0.0
 @onready var coyoteTimer = $CoyoteTimer
 @onready var speedChangeTimer = $SpeedChange
 @onready var lastTime = Time.get_ticks_msec()
@@ -20,10 +19,10 @@ var speedChange = 0.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _accelerationAndMovement(direction, speedChange):
-	if speedChange >= TOP_SPEED:
-		velocity.x = direction * TOP_SPEED
+	if speedChange >= TOP_SPEED * direction:
+		return
 	velocity.x = direction * speedChange
-	return velocity.x
+	return speedChange
 func _jump(onFloor, jumps):
 	if not onFloor and coyoteTimer.is_stopped():
 		jumps -= 1
@@ -64,10 +63,15 @@ func _physics_process(delta):
 	var direction = Input.get_axis("left", "right")
 
 	# Handle movement
-
 	if direction: 
-		speedChange = currentSpeed * 1.2
+		currentSpeed = velocity.x
+		if velocity.x == 0:
+			velocity.x = 1 * direction
+
+		var speedChange = currentSpeed * 1.2
 		currentSpeed = _accelerationAndMovement(direction, speedChange)
+	else:
+		currentSpeed = 1
 	
 	# Handle dash
 	if dashCooldown > 0:
