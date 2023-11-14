@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-
-@export var TOP_SPEED = 400.0
-@export var JUMP_VELOCITY = -475.0
+@export var JUMP_VELOCITY = -475
+@export var TOP_SPEED = 400
 @export var BASE_SPEED = 100
 @export var ACCELERATION_AMOUNT = 1.1
 @export var DECELERATION_AMOUNT = 1.1
 @export var MAX_DASH_COOLDOWN = 3000
+@export var DASH_SPEED = 150
 var JUMPS = 2
 var jumpAmount = 2
 var dashCooldown = 0
@@ -85,7 +85,7 @@ func _physics_process(delta):
 		if moveTime >= 100:
 			moveTime = 0
 		moveTime += 1 * deltaTime
-		velocity.x += direction * 175 * deltaTime
+		velocity.x += direction * DASH_SPEED * deltaTime
 		dashCooldown = MAX_DASH_COOLDOWN
 
 	move_and_slide()
