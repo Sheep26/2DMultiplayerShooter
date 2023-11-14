@@ -12,3 +12,8 @@ script = ExtResource("1_1qryo")
 position = Vector2(40, 0)
 scale = Vector2(93.9999, 22)
 texture = SubResource("PlaceholderTexture2D_yjc33")
+
+[node name="reloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="firerateTimer" type="Timer" parent="."]

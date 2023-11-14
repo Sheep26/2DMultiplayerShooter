@@ -15,7 +15,7 @@ var moveTime = 1000
 var health = 100
 var was_on_floor
 var currentSpeed = 1
-@onready var coyoteTimer = $CoyoteTimer
+@onready var coyoteTimer: Timer = $CoyoteTimer
 @onready var lastTime = Time.get_ticks_msec()
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
