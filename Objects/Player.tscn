@@ -30,6 +30,3 @@ one_shot = true
 
 [node name="Gun" parent="." instance=ExtResource("3_c48so")]
 position = Vector2(-3, -24)
-
-[node name="SpeedChange" type="Timer" parent="."]
-one_shot = true

@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
 
-const TOP_SPEED = 400.0
-const JUMP_VELOCITY = -475.0
-const JUMPS = 2
-const SPEED_CHANGES_PER_SECOND = 5.0
+@export var TOP_SPEED = 400.0
+@export var JUMP_VELOCITY = -475.0
+@export var BASE_SPEED = 100
+@export var ACCELERATION_AMOUNT = 1.1
+@export var DECELERATION_AMOUNT = 1.1
+@export var MAX_DASH_COOLDOWN = 3000
+var JUMPS = 2
 var jumpAmount = 2
 var dashCooldown = 0
 var deltaTime = 1
@@ -13,16 +16,20 @@ var health = 100
 var was_on_floor
 var currentSpeed = 1
 @onready var coyoteTimer = $CoyoteTimer
-@onready var speedChangeTimer = $SpeedChange
 @onready var lastTime = Time.get_ticks_msec()
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-func _accelerationAndMovement(direction, speedChange):
-	if speedChange >= TOP_SPEED * direction:
-		return
-	velocity.x = direction * speedChange
-	return speedChange
+func _accelerate(speed, targetSpeed):
+	if speed >= targetSpeed:
+		return targetSpeed
+	
+	return speed * ACCELERATION_AMOUNT
+func _decellerate(speed, targetSpeed):
+	if speed <= targetSpeed:
+		return targetSpeed
+	
+	return speed / DECELERATION_AMOUNT
 func _jump(onFloor, jumps):
 	if not onFloor and coyoteTimer.is_stopped():
 		jumps -= 1
@@ -40,8 +47,8 @@ func _draw():
 		
 func _process(_delta):
 	queue_redraw()
-func _ready():
-	speedChangeTimer.set_wait_time(1/SPEED_CHANGES_PER_SECOND)
+#func _ready():
+	#speedChangeTimer.set_wait_time(1/SPEED_CHANGES_PER_SECOND)
 func _physics_process(delta):
 	# Calculate Deltatime
 	deltaTime = Time.get_ticks_msec() - lastTime
@@ -63,15 +70,12 @@ func _physics_process(delta):
 	var direction = Input.get_axis("left", "right")
 
 	# Handle movement
-	if direction: 
-		currentSpeed = velocity.x
-		if velocity.x == 0:
-			velocity.x = 1 * direction
-
-		var speedChange = currentSpeed * 1.2
-		currentSpeed = _accelerationAndMovement(direction, speedChange)
+	if direction:
+		currentSpeed = _accelerate(currentSpeed, TOP_SPEED)
+		velocity.x = direction * currentSpeed
 	else:
-		currentSpeed = 1
+		currentSpeed = 100
+		velocity.x = move_toward(velocity.x, 0, currentSpeed)
 	
 	# Handle dash
 	if dashCooldown > 0:
@@ -82,7 +86,7 @@ func _physics_process(delta):
 			moveTime = 0
 		moveTime += 1 * deltaTime
 		velocity.x += direction * 175 * deltaTime
-		dashCooldown = 3000
+		dashCooldown = MAX_DASH_COOLDOWN
 
 	move_and_slide()
 	lastTime = Time.get_ticks_msec()
