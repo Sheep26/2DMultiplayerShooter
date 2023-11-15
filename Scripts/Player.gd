@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var DECELERATION_AMOUNT = 1.1
 @export var MAX_DASH_COOLDOWN = 3000
 @export var DASH_SPEED = 150
+@export var landing_curve = 0
+@export var speedCurve = Curve 
 var JUMPS = 2
 var jumpAmount = 2
 var dashCooldown = 0
@@ -57,8 +59,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
-		jumpAmount = JUMPS
-		
+		jumpAmount = JUMPS	
 	# Handles the coyote Time
 	_coyoteTime(is_on_floor())
 	

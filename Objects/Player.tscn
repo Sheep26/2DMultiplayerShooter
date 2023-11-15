@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://ri4jdx8dnjod"]
+[gd_scene load_steps=6 format=3 uid="uid://ri4jdx8dnjod"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_yc2jy"]
 [ext_resource type="Texture2D" uid="uid://7ebqfnx0ssx5" path="res://Assets/player.png" id="2_4p3dw"]
 [ext_resource type="PackedScene" uid="uid://bt5cdnr1s1w3v" path="res://Objects/Gun.tscn" id="3_c48so"]
+
+[sub_resource type="Curve" id="Curve_th21g"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.524306, 0.686833), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vui4c"]
 size = Vector2(88, 160)
@@ -10,6 +14,7 @@ size = Vector2(88, 160)
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(562, 246)
 script = ExtResource("1_yc2jy")
+speedCurve = SubResource("Curve_th21g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6, 1)
