@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bt5cdnr1s1w3v" path="res://Objects/Gun.tscn" id="3_c48so"]
 
 [sub_resource type="Curve" id="Curve_th21g"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.524306, 0.686833), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.538194, 0.44484), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vui4c"]
 size = Vector2(88, 160)
