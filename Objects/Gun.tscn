@@ -13,7 +13,20 @@ position = Vector2(40, 0)
 scale = Vector2(93.9999, 22)
 texture = SubResource("PlaceholderTexture2D_yjc33")
 
-[node name="reloadTimer" type="Timer" parent="."]
+[node name="Guns" type="Node" parent="."]
+
+[node name="pistol" type="Node" parent="Guns"]
+
+[node name="firerateTimer" type="Timer" parent="Guns/pistol"]
+wait_time = 0.2
+
+[node name="reloadTimer" type="Timer" parent="Guns/pistol"]
 wait_time = 2.0
 
-[node name="firerateTimer" type="Timer" parent="."]
+[node name="ak47" type="Node" parent="Guns"]
+
+[node name="firerateTimer" type="Timer" parent="Guns/ak47"]
+wait_time = 0.1
+
+[node name="reloadTimer" type="Timer" parent="Guns/ak47"]
+wait_time = 2.5

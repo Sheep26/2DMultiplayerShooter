@@ -1,28 +1,46 @@
 extends Node2D
 const KNOCKBACK_STRENGTH = 400
-@onready var bullet = preload("res://Objects/Bullet.tscn")
-@onready var reloadTimer: Timer = $reloadTimer
-@onready var firerateTimer: Timer = $firerateTimer
 var currentGun: GunType
-var pistol: GunType = GunType.new("pistol", 5, 2, 23, false)
-var ak47: GunType = GunType.new("ak47", 10, 2.5, 35, true)
+@onready var bullet = preload("res://Objects/Bullet.tscn")
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var pistol: GunType = GunType.new("Pistol", $Guns/pistol/firerateTimer, $Guns/pistol/reloadTimer, 23, false)
+@onready var ak47: GunType = GunType.new("AK47", $Guns/ak47/firerateTimer, $Guns/ak47/reloadTimer, 35, true)
 
 class GunType:
 	var gunName: String
-	var firerate: float
-	var reloadTime: float
+	var firerate: Timer
+	var reloadTimer: Timer
 	var ammo: int
+	var maxAmmo: int
 	var auto: bool
+	var canShoot: bool
 	
-	func _init(gunNameArg, firerateArg, reloadTimeArg, ammoArg, autoArg):
-		self.gunName = gunNameArg
-		self.firerate = firerateArg
-		self.reloadTime = reloadTimeArg
-		self.ammo = ammoArg
-		self.auto = autoArg
+	func _init(gunNameArg: String, firerateArg: Timer, reloadTimerArg: Timer, ammoArg: int, autoArg):
+		gunName = gunNameArg
+		firerate = firerateArg
+		reloadTimer = reloadTimerArg
+		ammo = ammoArg
+		maxAmmo = ammoArg
+		auto = autoArg
+		canShoot = true
+		firerate.connect("timeout", _firerateTimerEnded)
+		reloadTimer.connect("timeout", _reloadTimerEnded)
+		
+	func _reload():
+		canShoot = false
+		reloadTimer.start()
+		
+	func _reloadTimerEnded():
+		reloadTimer.stop()
+		canShoot = true
+		ammo = maxAmmo
+	
+	func _firerateTimerEnded():
+		canShoot = true
+		firerate.stop()
 
 func _ready():
-	currentGun = pistol
+	currentGun = ak47
 
 func _shoot(rotationToVector2):
 	get_parent().velocity.y = -(rotationToVector2.y * KNOCKBACK_STRENGTH) 
@@ -31,12 +49,14 @@ func _shoot(rotationToVector2):
 	bullet_instantiated.position = position + get_parent().position + rotationToVector2 * 94
 	get_tree().current_scene.add_child(bullet_instantiated)
 	currentGun.ammo -= 1
-	firerateTimer.start(1 / currentGun.firerate)
+	currentGun.canShoot = false
+	currentGun.firerate.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var rotationToVector2 = Vector2(cos(rotation), sin(rotation))
 	rotate(get_angle_to(get_global_mouse_position()))
-	# Firerate doesn't work idk why but it doesn't stop
-	if (Input.is_action_just_pressed("fire") or (currentGun.auto and Input.is_action_pressed("fire"))) and currentGun.ammo > 0 and firerateTimer.is_stopped():
+	if Input.is_action_just_pressed("reload"):
+		currentGun._reload()
+	if (Input.is_action_just_pressed("fire") or (currentGun.auto and Input.is_action_pressed("fire"))) and currentGun.ammo > 0 and currentGun.canShoot:
 		_shoot(rotationToVector2)
