@@ -4,7 +4,8 @@ const KNOCKBACK_STRENGTH = 400
 @onready var reloadTimer: Timer = $reloadTimer
 @onready var firerateTimer: Timer = $firerateTimer
 var currentGun: GunType
-var pistol: GunType = GunType.new("pistol", 10, 2, 23, false)
+var pistol: GunType = GunType.new("pistol", 5, 2, 23, false)
+var ak47: GunType = GunType.new("ak47", 10, 2.5, 35, true)
 
 class GunType:
 	var gunName: String
