@@ -10,6 +10,5 @@ func _ready():
 	startX = position.x
 	startY = position.y
 
-func _process(_delta):
-	position = position.move_toward(Vector2(startX+addX,startY+addY), _delta * speed)
-	pass
+func _process(delta):
+	position = position.move_toward(Vector2(startX+addX,startY+addY), delta * speed)
