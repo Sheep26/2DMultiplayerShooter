@@ -1,5 +1,5 @@
 extends Node2D
-const KNOCKBACK_STRENGTH = 400
+const KNOCKBACK_STRENGTH = 300
 var currentGun: GunType
 @onready var bullet = preload("res://Objects/Bullet.tscn")
 @onready var sprite: Sprite2D = $Sprite2D

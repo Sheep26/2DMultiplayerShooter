@@ -26,7 +26,7 @@ wait_time = 2.0
 [node name="ak47" type="Node" parent="Guns"]
 
 [node name="firerateTimer" type="Timer" parent="Guns/ak47"]
-wait_time = 0.1
+wait_time = 0.15
 
 [node name="reloadTimer" type="Timer" parent="Guns/ak47"]
 wait_time = 2.5
