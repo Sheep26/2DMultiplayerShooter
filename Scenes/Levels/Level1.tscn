@@ -27,4 +27,4 @@ texture = SubResource("PlaceholderTexture2D_dfd53")
 position = Vector2(769, 140)
 scale = Vector2(0.05, 0.05)
 speed = 200.0
-addX = 200.0
+add = Vector2(200, 0)
