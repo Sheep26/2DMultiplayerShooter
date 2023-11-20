@@ -9,7 +9,7 @@ size = Vector2(640, 142)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dfd53"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyjqm"]
-size = Vector2(1152, 648)
+size = Vector2(200, 31)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ibe85"]
 
@@ -30,16 +30,15 @@ texture = SubResource("PlaceholderTexture2D_dfd53")
 
 [node name="Moving platform" type="StaticBody2D" parent="."]
 position = Vector2(771, 108)
-scale = Vector2(0.1, 0.1)
 script = ExtResource("2_i6w06")
 speed = 200.0
 add = Vector2(50, 50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform"]
-position = Vector2(566, 314)
+position = Vector2(78.0001, 63.5)
 shape = SubResource("RectangleShape2D_fyjqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Moving platform"]
-position = Vector2(566, 314)
-scale = Vector2(1152, 648)
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
 texture = SubResource("PlaceholderTexture2D_ibe85")
