@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt5cdnr1s1w3v"]
+
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="1_1qryo"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yjc33"]
+
+[node name="Gun" type="Node2D"]
+position = Vector2(851, 233)
+script = ExtResource("1_1qryo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(40, 0)
+scale = Vector2(93.9999, 22)
+texture = SubResource("PlaceholderTexture2D_yjc33")
+
+[node name="Guns" type="Node" parent="."]
+
+[node name="pistol" type="Node" parent="Guns"]
+
+[node name="firerateTimer" type="Timer" parent="Guns/pistol"]
+wait_time = 0.2
+
+[node name="reloadTimer" type="Timer" parent="Guns/pistol"]
+wait_time = 2.0
+
+[node name="ak47" type="Node" parent="Guns"]
+
+[node name="firerateTimer" type="Timer" parent="Guns/ak47"]
+wait_time = 0.15
+
+[node name="reloadTimer" type="Timer" parent="Guns/ak47"]
+wait_time = 2.5
