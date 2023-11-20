@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbxr8pe7mjsty"]
+[gd_scene load_steps=4 format=3 uid="uid://ui746rh1c40f"]
 
 [ext_resource type="Script" path="res://Scripts/MovingPlatform.gd" id="1_02yv8"]
 

@@ -1,30 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbf5a28x61djd"]
+[gd_scene load_steps=7 format=3 uid="uid://bbf5a28x61djd"]
 
 [ext_resource type="PackedScene" uid="uid://ri4jdx8dnjod" path="res://Objects/Player.tscn" id="1_m5cqa"]
-[ext_resource type="PackedScene" uid="uid://dbxr8pe7mjsty" path="res://Objects/MovingPlatform.tscn" id="2_y0v4r"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatform.gd" id="2_i6w06"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lh3o"]
 size = Vector2(640, 142)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dfd53"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyjqm"]
+size = Vector2(1152, 648)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ibe85"]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_m5cqa")]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Platform 1" type="StaticBody2D" parent="."]
 position = Vector2(591, 404)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform 1"]
 shape = SubResource("RectangleShape2D_1lh3o")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Platform 1"]
 position = Vector2(-0.25, -0.25)
 scale = Vector2(640.5, 148.5)
 texture = SubResource("PlaceholderTexture2D_dfd53")
 
-[node name="MovingPlatform" parent="." instance=ExtResource("2_y0v4r")]
-position = Vector2(769, 140)
-scale = Vector2(0.05, 0.05)
+[node name="Moving platform" type="StaticBody2D" parent="."]
+position = Vector2(771, 108)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("2_i6w06")
 speed = 200.0
-add = Vector2(200, 0)
+add = Vector2(50, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform"]
+position = Vector2(566, 314)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform"]
+position = Vector2(566, 314)
+scale = Vector2(1152, 648)
+texture = SubResource("PlaceholderTexture2D_ibe85")

@@ -45,7 +45,7 @@ class GunType:
 		firerate.stop()
 
 func _ready():
-	currentGun = ak47
+	currentGun = glock18
 
 func _shoot(rotationToVector2):
 	get_parent().velocity.y = -(rotationToVector2.y * KNOCKBACK_STRENGTH) 
