@@ -5,7 +5,7 @@ import json
 from player import Player
 from random import randint
 
-players: Player = []
+players = []
 map: str
 
 with open("config.json", "r") as configFile:
@@ -22,13 +22,13 @@ def default():
 
 @app.route("/join")
 def join():
-    playerName = request.args("name")
+    playerName = request.args["name"]
     id = ""
     for n in range(9):
-        id += randint(0, 9)
-    player: Player = Player(playerName, id)
-    players.add(player)
-    return Response(player, 200)
+        id += str(randint(0, 9))
+    player = Player(playerName, id)
+    players.append(player)
+    return Response(f"", 200)
 
 @app.route("/getPlayerFromID")
 def getPlayerFromID():
