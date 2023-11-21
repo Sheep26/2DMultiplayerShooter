@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 func _ready():
 	pass
@@ -8,3 +8,6 @@ func _process(_delta):
 	var rotationToVector2 = Vector2(cos(rotation), sin(rotation))
 	position.x += rotationToVector2.x * 10
 	position.y += rotationToVector2.y * 10
+	
+func _on_body_entered(body):
+	print(body)
