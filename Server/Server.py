@@ -1,6 +1,8 @@
 import flask
 import json
 
+
+
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
     
