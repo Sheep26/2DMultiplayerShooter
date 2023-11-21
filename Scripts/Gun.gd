@@ -3,10 +3,12 @@ const KNOCKBACK_STRENGTH = 300
 var currentGun: GunType
 @onready var bullet = preload("res://Objects/Bullet.tscn")
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var glock18: GunType = GunType.new("Glock-18", "Pistol", "res://Assets/Guns/Glock18.png", $Guns/pistol/firerateTimer, $Guns/pistol/reloadTimer, 23, false)
-@onready var ak47: GunType = GunType.new("AK47", "Rifle", "res://Assets/Guns/AK47.png", $Guns/ak47/firerateTimer, $Guns/ak47/reloadTimer, 35, true)
+@onready var glock18: GunType = GunType.new(0, "Glock-18", "Pistol", "res://Assets/Guns/Glock18.png", $Guns/pistol/firerateTimer, $Guns/pistol/reloadTimer, 23, false)
+@onready var ak47: GunType = GunType.new(1, "AK47", "Rifle", "res://Assets/Guns/AK47.png", $Guns/ak47/firerateTimer, $Guns/ak47/reloadTimer, 35, true)
+var guns = []
 
 class GunType:
+	var id: int
 	var gunName: String
 	var category: String
 	var firerate: Timer
@@ -18,7 +20,7 @@ class GunType:
 	var texturePath: String
 	var texture: Texture2D
 	
-	func _init(gunNameArg: String, categoryArg: String, texturePathArg: String, firerateArg: Timer, reloadTimerArg: Timer, ammoArg: int, autoArg):
+	func _init(id: int, gunNameArg: String, categoryArg: String, texturePathArg: String, firerateArg: Timer, reloadTimerArg: Timer, ammoArg: int, autoArg):
 		gunName = gunNameArg
 		firerate = firerateArg
 		reloadTimer = reloadTimerArg
@@ -45,7 +47,15 @@ class GunType:
 		firerate.stop()
 
 func _ready():
+	guns.append(glock18)
+	guns.append(ak47)
 	currentGun = glock18
+	
+func _getGunFromID(id: int) -> GunType:
+	for gun in guns:
+		if gun.id == id:
+			return gun
+	return null
 
 func _shoot(rotationToVector2):
 	get_parent().velocity.y = -(rotationToVector2.y * KNOCKBACK_STRENGTH) 
