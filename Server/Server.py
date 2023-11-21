@@ -4,9 +4,10 @@ from flask import Response
 import json
 from player import Player
 from random import randint
+from maps import Map
 
 players = []
-map: str
+map: Map
 
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
@@ -26,9 +27,9 @@ def join():
     id = ""
     for n in range(9):
         id += str(randint(0, 9))
-    player = Player(playerName, id)
+    player = Player(playerName, id, map)
     players.append(player)
-    return Response(f"", 200)
+    return Response(f"{player.name}:{player.id}:{player.map}:{player.x}:{player.y}", 200)
 
 @app.route("/getPlayerFromID")
 def getPlayerFromID():
