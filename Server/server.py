@@ -38,5 +38,3 @@ def getPlayerFromID():
         if player.id == id:
             Response(player, 200)
     return Response(status=404)
-
-app.run("0.0.0.0", port)
