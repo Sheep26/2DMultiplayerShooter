@@ -5,7 +5,7 @@ import json
 from player import Player
 from random import randint
 
-players = []
+players: Player = []
 map: str
 
 with open("config.json", "r") as configFile:
