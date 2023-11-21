@@ -3,8 +3,10 @@ from flask import request
 from flask import Response
 import json
 from player import Player
+from random import randint
 
 players = []
+map: str
 
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
@@ -16,14 +18,24 @@ app = Flask(__name__)
 
 @app.route("/")
 def default():
-    return name
+    Response(name, 200)
+
+@app.route("/join")
+def join():
+    playerName = request.args("name")
+    id = ""
+    for n in range(9):
+        id += randint(0, 9)
+    player: Player = Player(playerName, id)
+    players.add(player)
+    return Response(player, 200)
 
 @app.route("/getPlayerFromID")
 def getPlayerFromID():
     id = request.args["id"]
     for player in players:
         if player.id == id:
-            return player
-    return ""
+            Response(player, 200)
+    return Response(status=404)
 
 app.run("0.0.0.0", port)

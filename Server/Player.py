@@ -4,6 +4,7 @@ class Player:
     y: int
     currentGunID: int
     id: int
+    map: str
     
     def __init__(self, name: str, id: str):
         self.name = name
