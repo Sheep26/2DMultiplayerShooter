@@ -1,7 +1,10 @@
 extends Control
 
+var globalScript = load("res://scripts/Global.gd")
+
 func _ready():
-	pass # Replace with function body.
+	globalScript._loadSettings()
+	globalScript.playerName = globalScript.getData()["settings"]["name"]
 
 func _process(delta):
 	pass
