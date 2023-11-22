@@ -55,7 +55,7 @@ def join():
     players.append(player)
     return Response(f"{player.name}:{player.id}:{map.name}:{map.path}:{player.x}:{player.y}", status=200)
 
-@app.route("leave")
+@app.route("/leave")
 def leave():
     id = request.args["id"]
     try:
@@ -116,5 +116,5 @@ def background():
             player.send("kicked?data=timedOut")
             players.remove(player)
 
-_thread.start_new_thread(background)
+_thread.start_new_thread(background, ())
 app.run("0.0.0.0", port)
