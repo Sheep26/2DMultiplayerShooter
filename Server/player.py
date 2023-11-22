@@ -11,6 +11,7 @@ class Player:
     map: Map
     ip: str
     alive: int
+    gunRotation: int
     
     def __init__(self, name: str, id: str, ip: str, map: Map):
         self.name = name
@@ -20,7 +21,8 @@ class Player:
         self.y = 0
         self.currentGunID = 1
         self.ip = ip
-        self.alive = True
+        self.alive = time
+        self.gunRotation = 0
         
     def setAlive(self):
         self.alive = time()
@@ -42,3 +44,9 @@ class Player:
     
     def getY(self) -> int:
         return self.y
+    
+    def setRotation(self, rotation: int):
+        self.rotation = rotation
+        
+    def getRotation(self) -> int:
+        return self.rotation
