@@ -77,7 +77,7 @@ func _physics_process(delta):
 		currentSpeed = _accelerate(currentSpeed, TOP_SPEED)
 		velocity.x = direction * currentSpeed
 	else:
-		currentSpeed = _decellerate(currentSpeed, BASE_SPEED)
+		currentSpeed = 100
 		velocity.x = move_toward(velocity.x, 0, currentSpeed)
 	
 	# Handle dash

@@ -77,7 +77,7 @@ def getPlayerFromIDRequest():
     id = request.args["id"]
     for player in players:
         if player.id == id:
-            Response(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}", status=200)
+            Response(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
     return Response(status=400)
 
 @app.route("/keepAlive")
@@ -95,6 +95,19 @@ def setPos():
     player.setX(x)
     player.setY(y)
     
+@app.route("/setRotation")
+def setRotation():
+    id = request.args["id"]
+    rotation = request.args["rotation"]
+    player = getPlayerFromID(id)
+    player.setRotation(rotation)
+    
+@app.route("/fireBullet")
+def fireBullet():
+    x = request.args["x"]
+    y = request.args["y"]
+    rotation = request.args["rotation"]
+
 def background():
     for player in players:
         if player.getAlive() - time > 2:
