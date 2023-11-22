@@ -8,6 +8,7 @@ from maps import Map
 from maps import Maps
 import _thread
 from time import time
+from time import sleep
 
 players = []
 map: Map
@@ -80,27 +81,15 @@ def getPlayerFromIDRequest():
             Response(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
     return Response(status=400)
 
-@app.route("/keepAlive")
-def keepAlive():
-    id = request.args["id"]
-    player = getPlayerFromID(id)
-    player.setAlive()
-    
-@app.route("/setPos")
-def setPos():
+@app.route("/updatePlayer")
+def updatePlayer():
     id = request.args["id"]
     x = request.args["x"]
     y = request.args["y"]
-    player = getPlayerFromID(id)
-    player.setX(x)
-    player.setY(y)
-    
-@app.route("/setRotation")
-def setRotation():
-    id = request.args["id"]
     rotation = request.args["rotation"]
     player = getPlayerFromID(id)
-    player.setRotation(rotation)
+    player.setAlive()
+    return Response(status=200)
     
 @app.route("/fireBullet")
 def fireBullet():
@@ -108,13 +97,14 @@ def fireBullet():
     y = request.args["y"]
     rotation = request.args["rotation"]
 
-def background():
+def main():
     for player in players:
         if player.getAlive() - time > 2:
             print(f"{player.name} is {player.getAlive() - time}s behind")
         if player.getAlive() - time > 30:
             player.send("kicked?data=timedOut")
             players.remove(player)
+    sleep(1/60)
 
-_thread.start_new_thread(background, ())
+_thread.start_new_thread(main, ())
 app.run("0.0.0.0", port)

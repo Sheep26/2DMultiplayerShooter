@@ -1,12 +1,10 @@
 extends Node
 
-@onready var httpClient: HTTPRequest = $HTTPRequest
-
 func _ready():
-	httpClient.request_completed.connect(_request_completed)
+	pass
 
-func _connect(ip: String):
-	httpClient.request(ip + "/join")
-	
-func _request_completed(result, response_code, headers, body):
+static func _connect(ip: String):
+	pass
+
+func _on_request_completed(_result, _response_code, _headers, _body):
 	pass

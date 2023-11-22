@@ -6,7 +6,7 @@ func _ready():
 	globalScript._loadSettings()
 	globalScript.playerName = globalScript.getData()["settings"]["name"]
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_singleplayer_button_pressed():

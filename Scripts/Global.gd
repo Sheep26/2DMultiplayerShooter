@@ -7,7 +7,7 @@ static var networkManager = load("res://Scripts/NetworkManager.gd")
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 static func _loadSettings():
