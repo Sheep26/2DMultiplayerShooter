@@ -2,6 +2,7 @@ extends Node
 
 static var data
 static var playerName: String
+static var networkManager = load("res://Scripts/NetworkManager.gd")
 
 func _ready():
 	pass
