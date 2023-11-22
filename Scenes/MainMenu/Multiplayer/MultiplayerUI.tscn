@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://b7cw4q7gn6aqm"]
+[gd_scene load_steps=2 format=3 uid="uid://b7cw4q7gn6aqm"]
+
+[ext_resource type="Script" path="res://Scripts/MultiplayerUI.gd" id="1_6v4bc"]
 
 [node name="MultiplayerUI" type="Control"]
 layout_mode = 3
@@ -7,3 +9,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6v4bc")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -19.0
+offset_right = 141.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Server IP"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -301.0
+offset_right = 60.0
+offset_bottom = -266.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Join"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

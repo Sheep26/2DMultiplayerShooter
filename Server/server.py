@@ -6,6 +6,8 @@ from player import Player
 from random import randint
 from maps import Map
 from maps import Maps
+import _thread
+from time import time
 
 players = []
 map: Map
@@ -13,9 +15,10 @@ map = Maps[0]
 
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
-    
+
 name: str = config["settings"]["serverName"]
 port: str = config["settings"]["serverPort"]
+maxPlayers: int = config["settings"]["maxPlayers"]
 
 app = Flask(__name__)
 
@@ -42,6 +45,8 @@ def getMap():
 
 @app.route("/join")
 def join():
+    if len(players) >= maxPlayers:
+        return Response("Max Players Reached", 423)
     playerName = request.args["name"]
     id = ""
     for n in range(9):
@@ -50,7 +55,7 @@ def join():
     players.append(player)
     return Response(f"{player.name}:{player.id}:{map.name}:{map.path}:{player.x}:{player.y}", status=200)
 
-@app.route("leave")
+@app.route("/leave")
 def leave():
     id = request.args["id"]
     try:
@@ -68,11 +73,48 @@ def getPlayers():
     return Response(str(returnList).replace('\'', "").replace("[", "").replace("]", "").replace(",", "\n"))
 
 @app.route("/getPlayerFromID")
-def getPlayerFromID():
+def getPlayerFromIDRequest():
     id = request.args["id"]
     for player in players:
         if player.id == id:
-            Response(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}", status=200)
+            Response(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
     return Response(status=400)
 
+@app.route("/keepAlive")
+def keepAlive():
+    id = request.args["id"]
+    player = getPlayerFromID(id)
+    player.setAlive()
+    
+@app.route("/setPos")
+def setPos():
+    id = request.args["id"]
+    x = request.args["x"]
+    y = request.args["y"]
+    player = getPlayerFromID(id)
+    player.setX(x)
+    player.setY(y)
+    
+@app.route("/setRotation")
+def setRotation():
+    id = request.args["id"]
+    rotation = request.args["rotation"]
+    player = getPlayerFromID(id)
+    player.setRotation(rotation)
+    
+@app.route("/fireBullet")
+def fireBullet():
+    x = request.args["x"]
+    y = request.args["y"]
+    rotation = request.args["rotation"]
+
+def background():
+    for player in players:
+        if player.getAlive() - time > 2:
+            print(f"{player.name} is {player.getAlive() - time}s behind")
+        if player.getAlive() - time > 30:
+            player.send("kicked?data=timedOut")
+            players.remove(player)
+
+_thread.start_new_thread(background, ())
 app.run("0.0.0.0", port)
