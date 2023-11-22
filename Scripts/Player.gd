@@ -1,7 +1,8 @@
 extends CharacterBody2D
  
-@export var JUMP_VELOCITY = -475
+@export var JUMP_VELOCITY = -500
 @export var TOP_SPEED = 400
+@export var RESPAWNTHRESHHOLD = 1500
 @export var BASE_SPEED = 100
 @export var ACCELERATION_AMOUNT = 1.1
 @export var DECELERATION_AMOUNT = 1.1
@@ -9,6 +10,8 @@ extends CharacterBody2D
 @export var DASH_SPEED = 150
 @export var landing_curve = 0
 @export var speedCurve = Curve
+@export var respawn_xpos = 500
+@export var respawn_ypos = 300
 var JUMPS = 2
 var jumpAmount = 2
 var dashCooldown = 0
@@ -23,6 +26,11 @@ var currentSpeed = 1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _respawn():
+	if position.y >= RESPAWNTHRESHHOLD:
+		position.y = respawn_ypos
+		position.x = respawn_xpos
 
 func _accelerate(speed, targetSpeed):
 	if speed >= targetSpeed:
@@ -65,6 +73,7 @@ func _physics_process(delta):
 		jumpAmount = JUMPS	
 	# Handles the coyote Time
 	_coyoteTime(is_on_floor())
+	_respawn()
 	
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and jumpAmount > 0:
