@@ -6,8 +6,8 @@ var start = Vector2()
 var goto = true
 
 func _ready():
-	start = position
 
+	start = position
 func _process(delta):
 	if goto:
 		position = position.move_toward(start, delta * speed)

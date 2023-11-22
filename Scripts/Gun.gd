@@ -59,6 +59,7 @@ func _getGunFromID(id: int) -> GunType:
 
 func _shoot(rotationToVector2):
 	get_parent().velocity.y = -(rotationToVector2.y * KNOCKBACK_STRENGTH) 
+	get_parent().velocity.x = -(rotationToVector2.x * KNOCKBACK_STRENGTH * 4) 
 	var bullet_instantiated = bullet.instantiate()
 	bullet_instantiated.rotation = rotation
 	bullet_instantiated.position = position + get_parent().position + rotationToVector2 * 94
