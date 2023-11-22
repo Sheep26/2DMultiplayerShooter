@@ -19,6 +19,12 @@ port: str = config["settings"]["serverPort"]
 
 app = Flask(__name__)
 
+def getPlayerFromID(id: int) -> Player:
+    for player in players:
+        if player.id == id:
+            return player
+    return None
+
 @app.route("/")
 def default():
     Response(name, 200)
@@ -29,7 +35,8 @@ def setMap():
     for map1 in Maps:
         if map1.name == mapName:
             map = map1
-            
+
+@app.route("/getMap")   
 def getMap():
     return Response(f"{map.path}")
 
@@ -42,6 +49,16 @@ def join():
     player = Player(playerName, id, map)
     players.append(player)
     return Response(f"{player.name}:{player.id}:{map.name}:{map.path}:{player.x}:{player.y}", status=200)
+
+@app.route("leave")
+def leave():
+    id = request.args["id"]
+    try:
+        player = getPlayerFromID(id)
+        players.remove(player)
+        return Response(status=200)
+    except:
+        return Response(status=400)
 
 @app.route("/getPlayers")
 def getPlayers():
@@ -56,6 +73,6 @@ def getPlayerFromID():
     for player in players:
         if player.id == id:
             Response(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}", status=200)
-    return Response(status=404)
+    return Response(status=400)
 
 app.run("0.0.0.0", port)
