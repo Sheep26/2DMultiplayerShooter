@@ -21,7 +21,7 @@ with open("config.json", "r") as configFile:
 name: str = config["generalSettings"]["serverName"]
 port: str = config["networkSettings"]["serverPort"]
 ip: str = config["networkSettings"]["serverIP"]
-maxPlayers: int = int(config["settings"]["maxPlayers"])
+maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
 
 app = Flask(__name__)
 
@@ -58,7 +58,7 @@ def join():
     player = Player(playerName, id, request.remote_addr, map)
     player.setLastPacketTime()
     players.append(player)
-    return Response(f"join\n{player.name}:{player.id}:{map.name}:{map.path}:{player.x}:{player.y}", status=200)
+    return Response(f"join:{name}:{map.name}:{player.name}:{player.id}:{map.path}:{player.x}:{player.y}", status=200)
 
 @app.route("/leave")
 def leave():
@@ -66,7 +66,7 @@ def leave():
     try:
         player = getPlayerFromID(id)
         players.remove(player)
-        return Response("leave\n", status=200)
+        return Response("leave:", status=200)
     except:
         return Response(status=400)
 
@@ -76,14 +76,14 @@ def getPlayers():
     for player in players:
         returnList.append(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
     playerStr = str(returnList).replace("\'", "").replace("[", "").replace("]", "").replace(",", "\n")
-    return Response(f'getPlayers\n{playerStr}')
+    return Response(f'getPlayers:{playerStr}')
 
 @app.route("/getPlayerFromID")
 def getPlayerFromIDRequest():
     id = request.args["id"]
     for player in players:
         if player.id == id:
-            Response(f"getPlayerFromID\n{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
+            Response(f"getPlayerFromID:{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
     return Response(status=400)
 
 @app.route("/updatePlayer")
@@ -94,14 +94,14 @@ def updatePlayer():
     rotation = request.args["rotation"]
     player = getPlayerFromID(id)
     player.setgetLastPacketTime()
-    return Response("updatePlayer\n", status=200)
+    return Response("updatePlayer:", status=200)
     
 @app.route("/fireBullet")
 def fireBullet():
     x = request.args["x"]
     y = request.args["y"]
     rotation = request.args["rotation"]
-    return Response("fireBullet\n", status=200)
+    return Response("fireBullet:", status=200)
 
 def main():
     for player in players:

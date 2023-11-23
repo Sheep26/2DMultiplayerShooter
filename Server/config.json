@@ -1,6 +1,6 @@
 {
     "generalSettings": {
-        "serverName": "",
+        "serverName": "2DMultiplayerGameServer",
         "maxPlayers": 32
     },
     "networkSettings": {

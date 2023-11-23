@@ -2,7 +2,6 @@ extends Control
 
 func _ready():
 	Global._loadSettings()
-	Global.playerName = Global.getData()["settings"]["name"]
 
 func _process(_delta):
 	pass
