@@ -10,7 +10,7 @@ class Player:
     id: int
     map: Map
     ip: str
-    alive: int
+    lastPacketTime: int
     gunRotation: int
     
     def __init__(self, name: str, id: str, ip: str, map: Map):
@@ -21,14 +21,14 @@ class Player:
         self.y = 0
         self.currentGunID = 1
         self.ip = ip
-        self.alive = time
+        self.lastPacketTime = time
         self.gunRotation = 0
         
-    def setAlive(self):
-        self.alive = time()
+    def setLastPacketTime(self):
+        self.lastPacketTime = time()
         
-    def getAlive(self) -> int:
-        return self.alive
+    def getLastPacketTime(self) -> int:
+        return self.lastPacketTime
     
     def sendPacket(self, packet: str):
         get(f"{self.ip}/packet")

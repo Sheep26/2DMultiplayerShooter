@@ -18,8 +18,9 @@ map = Maps[0]
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
 
-name: str = config["settings"]["serverName"]
-port: str = config["settings"]["serverPort"]
+name: str = config["generalSettings"]["serverName"]
+port: str = config["networkSettings"]["serverPort"]
+ip: str = config["networkSettings"]["serverIP"]
 maxPlayers: int = int(config["settings"]["maxPlayers"])
 
 app = Flask(__name__)
@@ -54,9 +55,9 @@ def join():
     for n in range(9):
         id += str(randint(0, 9))
     player = Player(playerName, id, request.remote_addr, map)
-    player.setAlive()
+    player.setgetLastPacketTime()
     players.append(player)
-    return Response(f"join:{player.name}:{player.id}:{map.name}:{map.path}:{player.x}:{player.y}", status=200)
+    return Response(f"join\n{player.name}:{player.id}:{map.name}:{map.path}:{player.x}:{player.y}", status=200)
 
 @app.route("/leave")
 def leave():
@@ -64,9 +65,9 @@ def leave():
     try:
         player = getPlayerFromID(id)
         players.remove(player)
-        return Response(status=200)
+        return Response("leave\n", status=200)
     except:
-        return Response(status=400)
+        return Response("leave\n", status=400)
 
 @app.route("/getPlayers")
 def getPlayers():
@@ -74,14 +75,14 @@ def getPlayers():
     for player in players:
         returnList.append(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
     playerStr = str(returnList).replace("\'", "").replace("[", "").replace("]", "").replace(",", "\n")
-    return Response(f'getPlayers:{playerStr}')
+    return Response(f'getPlayers\n{playerStr}')
 
 @app.route("/getPlayerFromID")
 def getPlayerFromIDRequest():
     id = request.args["id"]
     for player in players:
         if player.id == id:
-            Response(f"getPlayerFromID:{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
+            Response(f"getPlayerFromID\n{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
     return Response(status=400)
 
 @app.route("/updatePlayer")
@@ -91,24 +92,24 @@ def updatePlayer():
     y = request.args["y"]
     rotation = request.args["rotation"]
     player = getPlayerFromID(id)
-    player.setAlive()
-    return Response("updatePlayer:", status=200)
+    player.setgetLastPacketTime()
+    return Response("updatePlayer\n", status=200)
     
 @app.route("/fireBullet")
 def fireBullet():
     x = request.args["x"]
     y = request.args["y"]
     rotation = request.args["rotation"]
-    return Response("fireBullet:", status=200)
+    return Response("fireBullet\n", status=200)
 
 def main():
     for player in players:
-        if time - player.getAlive() > 2:
+        if time - player.getLastPacketTime() > 2:
             print(f"{player.name} is {time - player.getAlive()}s behind")
-        if time - player.getAlive() > 30:
+        if time - player.getLastPacketTime() > 30:
             player.send("kicked?data=timedOut")
             players.remove(player)
     sleep(1/60)
 
 _thread.start_new_thread(main, ())
-app.run("0.0.0.0", port)
+app.run(ip, port)

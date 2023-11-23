@@ -1,7 +1,10 @@
 {
-    "settings": {
+    "generalSettings": {
         "serverName": "",
-        "serverPort": "25566",
         "maxPlayers": 32
+    },
+    "networkSettings": {
+        "serverIP": "0.0.0.0",
+        "serverPort": "25566"
     }
 }
