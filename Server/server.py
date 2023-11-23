@@ -33,10 +33,11 @@ def getPlayerFromID(id: int) -> Player:
 
 @app.route("/")
 def default():
-    Response(name, 200)
+    Response(name)
 
 @app.route("/setMap")
 def setMap():
+    global map
     mapName = request.args["map"]
     for map1 in Maps:
         if map1.name == mapName:
@@ -55,7 +56,7 @@ def join():
     for n in range(9):
         id += str(randint(0, 9))
     player = Player(playerName, id, request.remote_addr, map)
-    player.setgetLastPacketTime()
+    player.setLastPacketTime()
     players.append(player)
     return Response(f"join\n{player.name}:{player.id}:{map.name}:{map.path}:{player.x}:{player.y}", status=200)
 
@@ -67,7 +68,7 @@ def leave():
         players.remove(player)
         return Response("leave\n", status=200)
     except:
-        return Response("leave\n", status=400)
+        return Response(status=400)
 
 @app.route("/getPlayers")
 def getPlayers():
