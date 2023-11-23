@@ -37,17 +37,20 @@ func _accelerate(speed, targetSpeed):
 		return targetSpeed
 	
 	return speed * ACCELERATION_AMOUNT
+
 func _decellerate(speed, targetSpeed):
 	if speed <= targetSpeed:
 		return targetSpeed
 	
 	return speed / DECELERATION_AMOUNT
+	
 func _jump(onFloor, jumps):
 	if not onFloor and coyoteTimer.is_stopped():
 		jumps -= 1
 	velocity.y = JUMP_VELOCITY
 	jumps -= 1
 	return jumps
+	
 func _coyoteTime(on_floor):
 	if was_on_floor and not on_floor:
 		coyoteTimer.start()
@@ -60,8 +63,8 @@ func _draw():
 		
 func _process(_delta):
 	queue_redraw()
-#func _ready():
-	#speedChangeTimer.set_wait_time(1/SPEED_CHANGES_PER_SECOND)
+	GameServer._sendRequest("updatePlayer?id=" + GameServer.playerID + "x=" + str(round(position.x)) + "&y=" + str(round(position.y)) + "&rotation=" + str(round(gun.rotation_degrees)))
+
 func _physics_process(delta):
 	# Calculate Deltatime
 	deltaTime = Time.get_ticks_msec() - lastTime

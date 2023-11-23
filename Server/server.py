@@ -58,7 +58,7 @@ def join():
     player = Player(playerName, id, request.remote_addr, map)
     player.setLastPacketTime()
     players.append(player)
-    return Response(f"join:{name}:{map.name}:{player.name}:{player.id}:{map.path}:{player.x}:{player.y}", status=200)
+    return Response(f"join:{name}:{map.path}:{map.name}:{player.name}:{player.id}:{player.x}:{player.y}", status=200)
 
 @app.route("/leave")
 def leave():
@@ -89,11 +89,17 @@ def getPlayerFromIDRequest():
 @app.route("/updatePlayer")
 def updatePlayer():
     id = request.args["id"]
+    print(1)
     x = request.args["x"]
+    print(2)
     y = request.args["y"]
+    print(3)
     rotation = request.args["rotation"]
+    print(4)
     player = getPlayerFromID(id)
-    player.setgetLastPacketTime()
+    print(5)
+    player.setLastPacketTime()
+    print(6)
     return Response("updatePlayer:", status=200)
     
 @app.route("/fireBullet")
@@ -110,7 +116,7 @@ def main():
         if time - player.getLastPacketTime() > 30:
             player.send("kicked?data=timedOut")
             players.remove(player)
-    sleep(1/60)
+    sleep(1/30)
 
 _thread.start_new_thread(main, ())
 app.run(ip, port)

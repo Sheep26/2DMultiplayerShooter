@@ -5,10 +5,12 @@ var serverIP: String
 var mapPath: String
 var otherPlayers: String
 var bullets: PackedScene
+var playerID: String
 
-func _init(serverIPArg: String, mapPathArg: String):
+func _setup(serverIPArg: String, mapPathArg: String, playerIDArg: String):
 	self.serverIP = serverIPArg
 	self.mapPath = mapPathArg
+	self.playerID = playerIDArg
 	
 func _loadIntoGame():
 	get_tree().current_scene.queue_free()
@@ -16,6 +18,6 @@ func _loadIntoGame():
 	var new = s.instantiate()
 	get_tree().root.add_child(new)
 	get_tree().current_scene = new
-
-func _update():
-	pass
+	
+func _sendRequest(data):
+	NetworkManager._sendRequest(serverIP + "/" + data)
