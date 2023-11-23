@@ -20,7 +20,7 @@ class GunType:
 	var texturePath: String
 	var texture: Texture2D
 	
-	func _init(id: int, gunNameArg: String, categoryArg: String, texturePathArg: String, firerateArg: Timer, reloadTimerArg: Timer, ammoArg: int, autoArg):
+	func _init(idArg: int, gunNameArg: String, categoryArg: String, texturePathArg: String, firerateArg: Timer, reloadTimerArg: Timer, ammoArg: int, autoArg):
 		gunName = gunNameArg
 		firerate = firerateArg
 		reloadTimer = reloadTimerArg
@@ -30,6 +30,7 @@ class GunType:
 		category = categoryArg
 		texturePath = texturePathArg
 		canShoot = true
+		id = idArg
 		firerate.connect("timeout", _firerateTimerEnded)
 		reloadTimer.connect("timeout", _reloadTimerEnded)
 		

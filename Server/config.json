@@ -2,6 +2,6 @@
     "settings": {
         "serverName": "",
         "serverPort": "25566",
-        "maxPlayers": "32"
+        "maxPlayers": 32
     }
 }

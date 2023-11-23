@@ -1,10 +1,8 @@
 extends Control
 
-var globalScript = load("res://scripts/Global.gd")
-
 func _ready():
-	globalScript._loadSettings()
-	globalScript.playerName = globalScript.getData()["settings"]["name"]
+	Global._loadSettings()
+	Global.playerName = Global.getData()["settings"]["name"]
 
 func _process(_delta):
 	pass
