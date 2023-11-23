@@ -112,12 +112,19 @@ def fireBullet():
     bullet: Bullet = Bullet(x, y, rotation)
     return Response(status=200)
 
+@app.route("/changeGun")
+def changeGun():
+    id = request.args["id"]
+    gunID = request.args["gunID"]
+    getPlayerFromID(id).currentGunID = gunID
+    return Response(status=200)
+
 def main():
     while-True:
         for player in players:
             if time() - player.getLastPacketTime() > 2:
                 print(f"{player.name} is {time() - player.getLastPacketTime()}s behind")
-            if time() - player.getLastPacket() > 30:
+            if time() - player.getLastPacketTime() > 30:
                 print(f"Removeing {player.name} due to timeout")
                 players.remove(player)
         

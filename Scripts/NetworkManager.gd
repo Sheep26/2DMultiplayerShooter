@@ -15,13 +15,11 @@ func _setup(ip: String):
 func _request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var bodyString = body.get_string_from_utf8()
-		print(bodyString)
 		var split = bodyString.split(":")
 		var whatRequest = split[0]
 		if whatRequest == "join":
 			print("Joined game " + split[1])
 			var level = split[2] + ":" + split[3]
-			print(level)
 			GameServer._setup(serverIP, level, split[6])
 			GameServer._loadIntoGame()
 	elif response_code == 400:
