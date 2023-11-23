@@ -89,19 +89,13 @@ def getPlayerFromIDRequest():
 @app.route("/updatePlayer")
 def updatePlayer():
     id = request.args["id"]
-    print(1)
     x = request.args["x"]
-    print(2)
     y = request.args["y"]
-    print(3)
     rotation = request.args["rotation"]
-    print(4)
     player = getPlayerFromID(id)
-    print(5)
     player.setLastPacketTime()
-    print(6)
     return Response("updatePlayer:", status=200)
-    
+
 @app.route("/fireBullet")
 def fireBullet():
     x = request.args["x"]
