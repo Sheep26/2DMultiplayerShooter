@@ -9,7 +9,7 @@ from maps import Maps
 from maps import level1
 import _thread
 from time import time
-from time import sleep
+import logging
 
 players = []
 map: Map
@@ -24,6 +24,8 @@ ip: str = config["networkSettings"]["serverIP"]
 maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
 
 app = Flask(__name__)
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 def getPlayerFromID(id: int) -> Player:
     for player in players:
@@ -49,6 +51,7 @@ def getMap():
 
 @app.route("/join")
 def join():
+    global players
     if len(players) >= maxPlayers:
         return Response("Max Players Reached", 423)
     playerName = request.args["name"]
@@ -92,25 +95,27 @@ def updatePlayer():
     x = request.args["x"]
     y = request.args["y"]
     rotation = request.args["rotation"]
-    player = getPlayerFromID(id)
-    player.setLastPacketTime()
-    return Response("updatePlayer:", status=200)
+    getPlayerFromID(id).setLastPacketTime()
+    getPlayerFromID(id).x = x
+    getPlayerFromID(id).y = y
+    getPlayerFromID(id).rotation = rotation
+    return Response(status=200)
 
 @app.route("/fireBullet")
 def fireBullet():
     x = request.args["x"]
     y = request.args["y"]
     rotation = request.args["rotation"]
-    return Response("fireBullet:", status=200)
+    return Response(status=200)
 
 def main():
-    for player in players:
-        if time - player.getLastPacketTime() > 2:
-            print(f"{player.name} is {time - player.getAlive()}s behind")
-        if time - player.getLastPacketTime() > 30:
-            player.send("kicked?data=timedOut")
-            players.remove(player)
-    sleep(1/30)
+    while-True:
+        for player in players:
+            if time() - player.getLastPacketTime() > 2:
+                print(f"{player.name} is {time() - player.getLastPacketTime()}s behind")
+            if time() - player.getLastPacket() > 30:
+                print(f"Removeing {player.name} due to timeout")
+                players.remove(player)
 
 _thread.start_new_thread(main, ())
 app.run(ip, port)

@@ -30,9 +30,9 @@ class Player:
     def getLastPacketTime(self) -> int:
         return self.lastPacketTime
     
-    def sendPacket(self, packet: str):
-        get(f"{self.ip}/packet")
-        
+    def sendData(self, packet: str):
+        get(f"{self.ip}/"+packet)
+    
     def setX(self, x: int):
         self.x = x
     
