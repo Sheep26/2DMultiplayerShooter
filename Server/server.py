@@ -11,10 +11,12 @@ import _thread
 from time import time
 import logging
 from bullet import Bullet
+from typing import List
 
-players = []
-map: Map
-map = Maps[0]
+players: List[Player] = list()
+bullets: List[Bullet] = list()
+map: Map = Maps[0]
+
 
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
@@ -118,6 +120,9 @@ def main():
             if time() - player.getLastPacket() > 30:
                 print(f"Removeing {player.name} due to timeout")
                 players.remove(player)
+        
+        for bullet in bullets:
+            bullet.update()
 
 _thread.start_new_thread(main, ())
 app.run(ip, port)
