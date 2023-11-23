@@ -51,7 +51,7 @@ func _ready():
 	guns.append(glock18)
 	guns.append(ak47)
 	currentGun = glock18
-	
+
 func _getGunFromID(id: int) -> GunType:
 	for gun in guns:
 		if gun.id == id:

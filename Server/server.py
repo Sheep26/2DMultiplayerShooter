@@ -61,7 +61,7 @@ def join():
     player = Player(playerName, id, request.remote_addr, map)
     player.setLastPacketTime()
     players.append(player)
-    return Response(f"join:{name}:{map.path}:{map.name}:{player.name}:{player.id}:{player.x}:{player.y}", status=200)
+    return Response(f"join:{name}:{map.path}:{map.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}", status=200)
 
 @app.route("/leave")
 def leave():
@@ -77,7 +77,7 @@ def leave():
 def getPlayers():
     returnList = []
     for player in players:
-        returnList.append(f"{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
+        returnList.append(f"{player.name}:{player.id}:{player.position.x}:{player.position.y}:{player.currentGunID}")
     playerStr = str(returnList).replace("\'", "").replace("[", "").replace("]", "").replace(",", "\n")
     return Response(f'getPlayers:{playerStr}')
 
@@ -86,7 +86,7 @@ def getPlayerFromIDRequest():
     id = request.args["id"]
     for player in players:
         if player.id == id:
-            Response(f"getPlayerFromID:{player.name}:{player.id}:{player.x}:{player.y}:{player.currentGunID}")
+            Response(f"getPlayerFromID:{player.name}:{player.id}:{player.position.x}:{player.position.y}:{player.currentGunID}")
     return Response(status=400)
 
 @app.route("/updatePlayer")
@@ -96,8 +96,8 @@ def updatePlayer():
     y = request.args["y"]
     rotation = request.args["rotation"]
     getPlayerFromID(id).setLastPacketTime()
-    getPlayerFromID(id).x = x
-    getPlayerFromID(id).y = y
+    getPlayerFromID(id).getPosition().setY(y)
+    getPlayerFromID(id).getPosition().setX(x)
     getPlayerFromID(id).rotation = rotation
     return Response(status=200)
 

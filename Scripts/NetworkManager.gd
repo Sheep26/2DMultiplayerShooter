@@ -11,7 +11,7 @@ func _setup(ip: String):
 		add_child(updatePlayerHttpRequest)
 		updatePlayerHttpRequest.request_completed.connect(_request_completed)
 	serverIP = ip
-	
+
 func _request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var bodyString = body.get_string_from_utf8()

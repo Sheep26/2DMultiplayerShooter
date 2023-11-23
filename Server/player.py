@@ -1,11 +1,11 @@
 from maps import Map
 from time import time
 from requests import get
+from vec2 import Vec2
 
 class Player:
     name: str
-    x: int
-    y: int
+    position: Vec2
     currentGunID: int
     id: int
     map: Map
@@ -17,8 +17,7 @@ class Player:
         self.name = name
         self.id = id
         self.map = map
-        self.x = 0
-        self.y = 0
+        self.position = Vec2(0, 0)
         self.currentGunID = 1
         self.ip = ip
         self.lastPacketTime = time
@@ -33,17 +32,11 @@ class Player:
     def sendData(self, packet: str):
         get(f"{self.ip}/"+packet)
     
-    def setX(self, x: int):
-        self.x = x
+    def getPosition(self) -> Vec2:
+        return self.position
     
-    def setY(self, y: int):
-        self.y = y
-    
-    def getX(self) -> int:
-        return self.x
-    
-    def getY(self) -> int:
-        return self.y
+    def setPosition(self, position: Vec2):
+        self.position = position
     
     def setRotation(self, rotation: int):
         self.rotation = rotation

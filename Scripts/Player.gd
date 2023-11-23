@@ -43,24 +43,24 @@ func _decellerate(speed, targetSpeed):
 		return targetSpeed
 	
 	return speed / DECELERATION_AMOUNT
-	
+
 func _jump(onFloor, jumps):
 	if not onFloor and coyoteTimer.is_stopped():
 		jumps -= 1
 	velocity.y = JUMP_VELOCITY
 	jumps -= 1
 	return jumps
-	
+
 func _coyoteTime(on_floor):
 	if was_on_floor and not on_floor:
 		coyoteTimer.start()
 	was_on_floor = on_floor
-	
+
 func _draw():
 	if dashCooldown > 0:
 		draw_string(Control.new().get_theme_font("Arial"), Vector2(-float(get_window().size.x)/2 + 10, -float(get_window().size.y)/2 + 20), "Dash: " + str(round(float(dashCooldown) / 1000)))
 	draw_string(Control.new().get_theme_font("Arial"), Vector2(-float(get_window().size.x)/2 + 10, float(get_window().size.y)/2 - 20), "Ammo: " + str(gun.currentGun.ammo))
-		
+
 func _process(_delta):
 	queue_redraw()
 	if Global._getIsMultiplayer():
