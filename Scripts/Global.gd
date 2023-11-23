@@ -2,6 +2,7 @@ extends Node
 
 var data
 var playerName: String
+var isMultiplayer: bool = false
 
 func _loadSettings():
 	var file = FileAccess.open("res://settings.json", FileAccess.READ_WRITE)
@@ -11,3 +12,9 @@ func _loadSettings():
 	
 func getConfigData():
 	return data
+
+func _getIsMultiplayer() -> bool:
+	return isMultiplayer
+
+func _setIsMultiplayer(arg):
+	isMultiplayer = arg

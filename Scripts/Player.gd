@@ -63,7 +63,8 @@ func _draw():
 		
 func _process(_delta):
 	queue_redraw()
-	GameServer._sendRequest("updatePlayer?id=" + GameServer.playerID + "&x=" + str(round(position.x)) + "&y=" + str(round(position.y)) + "&rotation=" + str(round(gun.rotation_degrees)))
+	if Global._getIsMultiplayer():
+		GameServer._sendRequest("updatePlayer?id=" + GameServer.playerID + "&x=" + str(round(position.x)) + "&y=" + str(round(position.y)) + "&rotation=" + str(round(gun.rotation_degrees)))
 
 func _physics_process(delta):
 	# Calculate Deltatime

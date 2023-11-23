@@ -7,6 +7,7 @@ func _process(_delta):
 	pass
 
 func _on_singleplayer_button_pressed():
+	Global._setIsMultiplayer(false)
 	get_tree().current_scene.queue_free()
 	var s = ResourceLoader.load("res://Scenes/Levels/Level1.tscn")
 	var new = s.instantiate()
