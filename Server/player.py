@@ -11,7 +11,7 @@ class Player:
     map: Map
     ip: str
     lastPacketTime: int
-    gunRotation: int
+    rotation: int
     
     def __init__(self, name: str, id: str, ip: str, map: Map):
         self.name = name
@@ -21,7 +21,7 @@ class Player:
         self.currentGunID = 1
         self.ip = ip
         self.lastPacketTime = time
-        self.gunRotation = 0
+        self.rotation = 0
         
     def setLastPacketTime(self):
         self.lastPacketTime = time()

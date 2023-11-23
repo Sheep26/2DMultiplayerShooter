@@ -10,6 +10,7 @@ from maps import level1
 import _thread
 from time import time
 import logging
+from bullet import Bullet
 
 players = []
 map: Map
@@ -106,6 +107,7 @@ def fireBullet():
     x = request.args["x"]
     y = request.args["y"]
     rotation = request.args["rotation"]
+    bullet: Bullet = Bullet(x, y, rotation)
     return Response(status=200)
 
 def main():
