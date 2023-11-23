@@ -110,6 +110,7 @@ def fireBullet():
     y = request.args["y"]
     rotation = request.args["rotation"]
     bullet: Bullet = Bullet(x, y, rotation)
+    bullets.append(bullet)
     return Response(status=200)
 
 @app.route("/changeGun")
