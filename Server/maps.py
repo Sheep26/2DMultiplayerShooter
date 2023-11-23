@@ -12,5 +12,5 @@ class Map:
         self.spawnX = spawnX
         self.spawnY = spawnY
         
-level1: Map = Map("level1", 1, "", 20, 20)
+level1: Map = Map("level1", 1, "res://Scenes/Levels/Level1.tscn", 20, 20)
 Maps = [level1]
