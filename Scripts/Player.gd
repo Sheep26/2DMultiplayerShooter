@@ -64,7 +64,7 @@ func _draw():
 func _process(_delta):
 	queue_redraw()
 	if Global._getIsMultiplayer():
-		GameServer._sendRequest("updatePlayer?id=" + GameServer.playerID + "&x=" + str(round(position.x)) + "&y=" + str(round(position.y)) + "&rotation=" + str(round(gun.rotation_degrees)))
+		GameServer._sendRequest("updatePlayer?id=" + GameServer.playerID + "&x=" + str(round(position.x)) + "&y=" + str(round(position.y)) + "&rotation=" + str(round(gun.rotation)))
 
 func _notification(_notification: int):
 	if _notification == NOTIFICATION_WM_CLOSE_REQUEST:

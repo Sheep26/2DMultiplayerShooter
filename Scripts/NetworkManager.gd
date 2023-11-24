@@ -41,10 +41,12 @@ func _request_completed(_result, response_code, _headers, body):
 func _downloadMap_completed(result, _response_code, _headers, body):
 	if result != OK:
 		print("Download failed")
+	var dir_access = DirAccess.open("user://")
+	if not dir_access.dir_exists(Global.mapsFolder):
+		dir_access.make_dir("Maps")
 	var file: FileAccess = FileAccess.open(downloadFile, FileAccess.WRITE)
 	file.store_string(body.get_string_from_utf8())
 	file.close()
-	# How to save file we have the bytes under the body arg and you can convert it to String with get_string_from_utf8()
 	if isJoiningGame:
 		GameServer._loadIntoGame()
 

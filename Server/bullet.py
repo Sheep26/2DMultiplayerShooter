@@ -3,10 +3,10 @@ from vec2 import Vec2
 
 class Bullet:
     position: Vec2
-    rotation: int
+    rotation: float
     rotationToVec2: Vec2
 
-    def __init__(self, x: int, y: int, rotation: int):
+    def __init__(self, x: int, y: int, rotation: float):
         self.position = Vec2(x, y)
         self.rotation = rotation
 
