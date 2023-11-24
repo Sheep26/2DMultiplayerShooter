@@ -16,7 +16,6 @@ import socket
 
 players: List[Player] = list()
 bullets: List[Bullet] = list()
-Maps: List[Map] = list()
 
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
@@ -25,14 +24,7 @@ name: str = config["generalSettings"]["serverName"]
 maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
 ip: str = "0.0.0.0"
 port: str = config["networkSettings"]["serverPort"]
-for map in config["maps"]:
-    mapName = config["maps"][map]["name"]
-    mapPathOnServer = config["maps"][map]["pathOnServer"]
-    mapPathOnClient = config["maps"][map]["pathOnClient"]
-    mapStartX = float(config["maps"][map]["startX"])
-    mapStartY = float(config["maps"][map]["startY"])
-    Maps.append(Map(mapName, mapPathOnServer, mapPathOnClient, mapStartX, mapStartY))
-currentMap: Map = Maps[int(config["generalSettings"]["currentMap"])-1]
+currentMap: Map = Map(config["maps"][config["generalSettings"]["currentMap"]]["name"], config["maps"][config["generalSettings"]["currentMap"]]["pathOnServer"], config["maps"][config["generalSettings"]["currentMap"]]["pathOnClient"], config["maps"][config["generalSettings"]["currentMap"]]["startX"], config["maps"][config["generalSettings"]["currentMap"]]["startY"])
 
 app = Flask(__name__)
 
@@ -48,18 +40,6 @@ def getPlayerFromID(id: int) -> Player:
 @app.route("/")
 def default():
     Response(name)
-
-@app.route("/setMap")
-def setMap():
-    global currentMap
-    mapName = request.args["map"]
-    for map1 in Maps:
-        if map1.name == mapName:
-            currentMap = map1
-
-@app.route("/getMap")   
-def getMap():
-    return Response(f"{currentMap}")
 
 @app.route("/join")
 def join():
