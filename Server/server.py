@@ -121,11 +121,12 @@ def updatePlayer():
 @app.route("/fireBullet")
 def fireBullet():
     # Get bullet data
+    shooterID = request.args["shooterID"]
     x = request.args["x"]
     y = request.args["y"]
     rotation = request.args["rotation"]
     # Make bullet object and add to list
-    bullet: Bullet = Bullet(x, y, rotation)
+    bullet: Bullet = Bullet(int(shooterID), float(x), float(y), float(rotation))
     bullets.append(bullet)
     return Response(status=200)
 
@@ -144,7 +145,7 @@ def getBullets():
     # Cycle through every bullet
     for bullet in bullets:
         # Add them to a list
-        returnList.append(f"{bullet.position.x}:{bullet.position.y}:{bullet.rotation}")
+        returnList.append(f"{bullet.shooterID}:{bullet.position.x}:{bullet.position.y}:{bullet.rotation}")
     # Convert the list to a string and then format
     bulletStr = str(returnList).replace("[", "").replace("]", "").replace(",", "\n")
     return Response(bulletStr, status=200)
