@@ -1,17 +1,15 @@
 {
     "generalSettings": {
-        "serverName": "2DMultiplayerGameServer",
+        "serverName": "GameServer",
         "maxPlayers": 32
     },
     "networkSettings": {
-        "serverIP": "0.0.0.0",
         "serverPort": "25566"
     },
     "maps": {
         "level1": {
             "name": "Level1",
-            "id": 1,
-            "pathOnServer": "Maps/Level1.tscn",
+            "pathOnServer": "Level1.tscn",
             "pathOnClient": "user://Maps/Level1.tsnc",
             "startX": 562,
             "startY": 246

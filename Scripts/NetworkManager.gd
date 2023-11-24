@@ -2,6 +2,7 @@ extends Node
 
 var serverIP: String
 var isJoiningGame: bool = false
+var downloadFile: String
 @onready var httpRequest: HTTPRequest = HTTPRequest.new()
 @onready var updatePlayerHttpRequest: HTTPRequest = HTTPRequest.new()
 @onready var downloadRequest: HTTPRequest = HTTPRequest.new()
@@ -18,7 +19,7 @@ func _setup(ip: String):
 		downloadRequest.request_completed.connect(_download_completed)
 	serverIP = ip
 
-func _request_completed(result, response_code, _headers, body):
+func _request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var bodyString = body.get_string_from_utf8()
 		var split = bodyString.split(":")
@@ -31,15 +32,16 @@ func _request_completed(result, response_code, _headers, body):
 			GameServer._setup(serverIP, mapPathOnClient, split[7])
 			if not FileAccess.file_exists(mapPathOnClient):
 				print("Downloading Map")
-				_download("http://" + serverIP + "/maps/" + mapPathOnServer, mapPathOnClient)
+				_downloadMap(mapPathOnServer, mapPathOnClient)
 			else:
 				GameServer._loadIntoGame()
 	elif response_code == 400:
 		print("Either server issue or request issue")
 		
-func _download_completed(result, _response_code, _headers, _body):
+func _download_completed(result, _response_code, _headers, body):
 	if result != OK:
 		print("Download failed")
+	# How to save file we have the bytes under the body arg and you can convert it to String with get_string_from_utf8()
 	if isJoiningGame:
 		GameServer._loadIntoGame()
 
@@ -51,11 +53,12 @@ func _leave():
 	print("Disconnecting from " + serverIP)
 	httpRequest.request("http://" + serverIP + "/leave?id=" + GameServer.playerID)
 
-func _download(url, downloadPath):
-	pass
-
 func _sendRequest(data: String):
 	if "updatePlayer" in data:
 		updatePlayerHttpRequest.request("http://" + data)
 	else:
 		httpRequest.request("http://" + data)
+		
+func _downloadMap(mapPath, savePath):
+	downloadFile = savePath
+	downloadRequest.request("http://" + serverIP + "/map?mapPath=" + mapPath)
