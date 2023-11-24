@@ -32,7 +32,7 @@ for map in config["maps"]:
     mapStartX = float(config["maps"][map]["startX"])
     mapStartY = float(config["maps"][map]["startY"])
     Maps.append(Map(mapName, mapPathOnServer, mapPathOnClient, mapStartX, mapStartY))
-currentMap: Map = Maps[0]
+currentMap: Map = Maps[int(config["generalSettings"]["currentMap"])-1]
 
 app = Flask(__name__)
 
@@ -146,6 +146,7 @@ def map():
 
 def main():
     print(f"Server running on {socket.gethostbyname(socket.gethostname())}:{port}")
+    print(f"Server running on map {currentMap.name}")
     while-True:
         for player in players:
             if time() - player.getLastPacketTime() == 2:

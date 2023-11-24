@@ -1,13 +1,14 @@
 {
     "generalSettings": {
         "serverName": "GameServer",
-        "maxPlayers": 32
+        "maxPlayers": 32,
+        "currentMap": 1
     },
     "networkSettings": {
         "serverPort": "25566"
     },
     "maps": {
-        "level1": {
+        "1": {
             "name": "Level1",
             "pathOnServer": "Level1.tscn",
             "pathOnClient": "user://Maps/Level1.tsnc",
