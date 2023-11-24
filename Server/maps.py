@@ -3,14 +3,13 @@ from vec2 import Vec2
 class Map:
     name: str
     id: int
-    path: str
+    pathOnServer: str
+    pathOnClient: str
     spawnPosition: Vec2
     
-    def __init__(self, name: str, id: int, path: str, spawnX: float, spawnY: float):
+    def __init__(self, name: str, id: int, pathOnServer: str, pathOnClient: str, spawnX: float, spawnY: float):
         self.name = name
         self.id = id
-        self.path = path
+        self.pathOnServer = pathOnServer
+        self.pathOnClient = pathOnClient
         self.spawnPosition = Vec2(spawnX, spawnY)
-        
-level1: Map = Map("level1", 1, "res://Scenes/Levels/Level1.tscn", 562, 246)
-Maps = [level1]

@@ -13,6 +13,7 @@ func _setup(serverIPArg: String, mapPathArg: String, playerIDArg: String):
 	self.playerID = playerIDArg
 
 func _loadIntoGame():
+	NetworkManager.isJoiningGame = false
 	get_tree().current_scene.queue_free()
 	var s = ResourceLoader.load(mapPath)
 	var new = s.instantiate()

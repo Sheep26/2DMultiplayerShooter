@@ -1,0 +1,299 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbf5a28x61djd"]
+
+[ext_resource type="PackedScene" uid="uid://ri4jdx8dnjod" path="res://Objects/Player.tscn" id="1_m5cqa"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatform.gd" id="2_i6w06"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lh3o"]
+size = Vector2(640, 142)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dfd53"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyjqm"]
+size = Vector2(200, 89)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ibe85"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_m5cqa")]
+
+[node name="Platform 1" type="StaticBody2D" parent="."]
+position = Vector2(591, 404)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform 1"]
+shape = SubResource("RectangleShape2D_1lh3o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform 1"]
+position = Vector2(-0.25, -0.25)
+scale = Vector2(640.5, 148.5)
+texture = SubResource("PlaceholderTexture2D_dfd53")
+
+[node name="Moving platform" type="StaticBody2D" parent="."]
+position = Vector2(3101, 42)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform2" type="StaticBody2D" parent="."]
+position = Vector2(146, 72)
+scale = Vector2(0.853323, 0.426387)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, -50)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform2"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform2"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform3" type="StaticBody2D" parent="."]
+position = Vector2(1067, 153)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform3"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform3"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform4" type="StaticBody2D" parent="."]
+position = Vector2(2577, 478)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform4"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform4"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform5" type="StaticBody2D" parent="."]
+position = Vector2(2282, 354)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform5"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform5"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform6" type="StaticBody2D" parent="."]
+position = Vector2(1899, 125)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform6"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform6"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform7" type="StaticBody2D" parent="."]
+position = Vector2(1568, 308)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform7"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform7"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform8" type="StaticBody2D" parent="."]
+position = Vector2(1352, 65)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform8"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform8"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Platform 2" type="StaticBody2D" parent="."]
+position = Vector2(2014, 664)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform 2"]
+shape = SubResource("RectangleShape2D_1lh3o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform 2"]
+position = Vector2(-0.25, -0.25)
+scale = Vector2(640.5, 148.5)
+texture = SubResource("PlaceholderTexture2D_dfd53")
+
+[node name="Platform 3" type="StaticBody2D" parent="."]
+position = Vector2(2516, -47)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform 3"]
+shape = SubResource("RectangleShape2D_1lh3o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform 3"]
+position = Vector2(-0.25, -0.25)
+scale = Vector2(640.5, 148.5)
+texture = SubResource("PlaceholderTexture2D_dfd53")
+
+[node name="Moving platform9" type="StaticBody2D" parent="."]
+position = Vector2(1041, 687)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform9"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform9"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform10" type="StaticBody2D" parent="."]
+position = Vector2(671, -68)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform10"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform10"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform11" type="StaticBody2D" parent="."]
+position = Vector2(3017, 477)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform11"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform11"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Moving platform12" type="StaticBody2D" parent="."]
+position = Vector2(2846, 215)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform12"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform12"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")
+
+[node name="Platform 4" type="StaticBody2D" parent="."]
+position = Vector2(1716, -199)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform 4"]
+shape = SubResource("RectangleShape2D_1lh3o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform 4"]
+position = Vector2(-0.25, -0.25)
+scale = Vector2(640.5, 148.5)
+texture = SubResource("PlaceholderTexture2D_dfd53")
+
+[node name="Platform 5" type="StaticBody2D" parent="."]
+position = Vector2(3798, 318)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform 5"]
+shape = SubResource("RectangleShape2D_1lh3o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform 5"]
+position = Vector2(-0.25, -0.25)
+scale = Vector2(640.5, 148.5)
+texture = SubResource("PlaceholderTexture2D_dfd53")
+
+[node name="Moving platform13" type="StaticBody2D" parent="."]
+position = Vector2(2135, -357)
+scale = Vector2(0.824413, 0.463982)
+script = ExtResource("2_i6w06")
+speed = 100.0
+add = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moving platform13"]
+position = Vector2(78.0001, 34.5)
+shape = SubResource("RectangleShape2D_fyjqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving platform13"]
+position = Vector2(78.0001, 34.5)
+scale = Vector2(200, 89)
+texture = SubResource("PlaceholderTexture2D_ibe85")

@@ -1,12 +1,11 @@
 from flask import Flask
 from flask import request
 from flask import Response
+from flask import send_from_directory
 import json
 from player import Player
 from random import randint
 from maps import Map
-from maps import Maps
-from maps import level1
 import _thread
 from time import time
 import logging
@@ -15,7 +14,7 @@ from typing import List
 
 players: List[Player] = list()
 bullets: List[Bullet] = list()
-map: Map = Maps[0]
+Maps: List[Map] = list()
 
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
@@ -24,6 +23,15 @@ name: str = config["generalSettings"]["serverName"]
 maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
 ip: str = config["networkSettings"]["serverIP"]
 port: str = config["networkSettings"]["serverPort"]
+for map in config["maps"]:
+    mapName = config["maps"][map]["name"]
+    mapID = config["maps"][map]["id"]
+    mapPathOnServer = config["maps"][map]["pathOnServer"]
+    mapPathOnClient = config["maps"][map]["pathOnClient"]
+    mapStartX = float(config["maps"][map]["startX"])
+    mapStartY = float(config["maps"][map]["startY"])
+    Maps.append(Map(mapName, mapID, mapPathOnServer, mapPathOnClient, mapStartX, mapStartY))
+currentMap: Map = Maps[0]
 
 app = Flask(__name__)
 
@@ -42,15 +50,15 @@ def default():
 
 @app.route("/setMap")
 def setMap():
-    global map
+    global currentMap
     mapName = request.args["map"]
     for map1 in Maps:
         if map1.name == mapName:
-            map = map1
+            currentMap = map1
 
 @app.route("/getMap")   
 def getMap():
-    return Response(f"{map.path}")
+    return Response(f"{currentMap}")
 
 @app.route("/join")
 def join():
@@ -60,11 +68,11 @@ def join():
     id = ""
     for n in range(9):
         id += str(randint(0, 9))
-    player = Player(playerName, id, request.remote_addr, map)
+    player = Player(playerName, id, request.remote_addr, currentMap)
     player.setLastPacketTime()
-    player.setPosition(map.spawnPosition.x, map.spawnPosition.y)
+    player.setPosition(currentMap.spawnPosition.x, currentMap.spawnPosition.y)
     players.append(player)
-    return Response(f"join:{name}:{map.path}:{map.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}", status=200)
+    return Response(f"join:{name}:{currentMap.pathOnClient}:{currentMap.pathOnServer}:{currentMap.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}", status=200)
 
 @app.route("/leave")
 def leave():
@@ -127,6 +135,10 @@ def getBullets():
         returnList.append(f"{bullet.position.x}:{bullet.position.y}:{bullet.rotation}")
     bulletStr = str(returnList).replace("[", "").replace("]", "").replace(",", "\n")
     return Response(bulletStr, status=200)
+
+@app.route("/map/<mapPath>")
+def map(mapPath):
+    return send_from_directory("map", mapPath)
 
 def main():
     while-True:
