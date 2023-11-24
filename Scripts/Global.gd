@@ -3,6 +3,7 @@ extends Node
 var data
 var playerName: String
 var isMultiplayer: bool = false
+var mapsFolder = "user://Maps"
 
 func _loadSettings():
 	var file = FileAccess.open("res://settings.json", FileAccess.READ_WRITE)

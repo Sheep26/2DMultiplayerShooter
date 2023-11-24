@@ -11,7 +11,7 @@
         "level1": {
             "name": "Level1",
             "pathOnServer": "Level1.tscn",
-            "pathOnClient": "user://Maps/Level1.tsnc",
+            "pathOnClient": "user://Maps/Level1.tscn",
             "startX": 562,
             "startY": 246
         }
