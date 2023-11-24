@@ -17,18 +17,18 @@ players: List[Player] = list()
 bullets: List[Bullet] = list()
 map: Map = Maps[0]
 
-
 with open("config.json", "r") as configFile:
     config = json.load(configFile)
 
 name: str = config["generalSettings"]["serverName"]
-port: str = config["networkSettings"]["serverPort"]
-ip: str = config["networkSettings"]["serverIP"]
 maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
+ip: str = config["networkSettings"]["serverIP"]
+port: str = config["networkSettings"]["serverPort"]
 
 app = Flask(__name__)
-#log = logging.getLogger('werkzeug')
-#log.setLevel(logging.ERROR)
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 def getPlayerFromID(id: int) -> Player:
     for player in players:
@@ -54,7 +54,6 @@ def getMap():
 
 @app.route("/join")
 def join():
-    global players
     if len(players) >= maxPlayers:
         return Response("Max Players Reached", 423)
     playerName = request.args["name"]
