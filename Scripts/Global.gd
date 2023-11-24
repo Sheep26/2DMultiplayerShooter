@@ -18,3 +18,8 @@ func _getIsMultiplayer() -> bool:
 
 func _setIsMultiplayer(arg):
 	isMultiplayer = arg
+	
+func _handleGameQuit():
+	if _getIsMultiplayer():
+		NetworkManager._leave()
+	print("Quitting")

@@ -65,6 +65,7 @@ func _shoot(rotationToVector2):
 	bullet_instantiated.rotation = rotation
 	bullet_instantiated.position = position + get_parent().position + rotationToVector2 * 94
 	get_tree().current_scene.add_child(bullet_instantiated)
+	GameServer._sendRequest("fireBullet?x="+str(bullet_instantiated.position.x)+"&y="+str(bullet_instantiated.position.y)+"&rotation="+str(bullet_instantiated.rotation))
 	currentGun.ammo -= 1
 	currentGun.canShoot = false
 	currentGun.firerate.start()

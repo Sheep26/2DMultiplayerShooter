@@ -27,8 +27,8 @@ ip: str = config["networkSettings"]["serverIP"]
 maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
 
 app = Flask(__name__)
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+#log = logging.getLogger('werkzeug')
+#log.setLevel(logging.ERROR)
 
 def getPlayerFromID(id: int) -> Player:
     for player in players:
@@ -119,6 +119,14 @@ def changeGun():
     gunID = request.args["gunID"]
     getPlayerFromID(id).currentGunID = gunID
     return Response(status=200)
+
+@app.route("/getBullets")
+def getBullets():
+    returnList = []
+    for bullet in bullets:
+        returnList.append(f"{bullet.position.x}:{bullet.position.y}:{bullet.rotation}")
+    bulletStr = str(returnList).replace("[", "").replace("]", "").replace(",", "\n")
+    return Response(bulletStr, status=200)
 
 def main():
     while-True:

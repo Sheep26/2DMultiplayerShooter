@@ -18,7 +18,7 @@ func _request_completed(_result, response_code, _headers, body):
 		var split = bodyString.split(":")
 		var whatRequest = split[0]
 		if whatRequest == "join":
-			print("Joined game " + split[1])
+			print("Connected to " + split[1])
 			var level = split[2] + ":" + split[3]
 			GameServer._setup(serverIP, level, split[6])
 			GameServer._loadIntoGame()
@@ -26,7 +26,12 @@ func _request_completed(_result, response_code, _headers, body):
 		print("Either server issue or request issue")
 
 func _connect():
+	print("Connecting to " + serverIP)
 	httpRequest.request("http://" + serverIP + "/join?name=" + Global.playerName)
+
+func _leave():
+	print("Disconnecting from " + serverIP)
+	httpRequest.request("http://" + serverIP + "/leave?id=" + GameServer.playerID)
 
 func _sendRequest(data: String):
 	if data.begins_with("updatePlayer"):

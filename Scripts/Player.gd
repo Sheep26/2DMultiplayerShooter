@@ -66,6 +66,10 @@ func _process(_delta):
 	if Global._getIsMultiplayer():
 		GameServer._sendRequest("updatePlayer?id=" + GameServer.playerID + "&x=" + str(round(position.x)) + "&y=" + str(round(position.y)) + "&rotation=" + str(round(gun.rotation_degrees)))
 
+func _notification(notification: int):
+	if notification == NOTIFICATION_WM_CLOSE_REQUEST:
+		Global._handleGameQuit()
+
 func _physics_process(delta):
 	# Calculate Deltatime
 	deltaTime = Time.get_ticks_msec() - lastTime
