@@ -27,8 +27,8 @@ ip: str = config["networkSettings"]["serverIP"]
 maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
 
 app = Flask(__name__)
-#log = logging.getLogger('werkzeug')
-#log.setLevel(logging.ERROR)
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 def getPlayerFromID(id: int) -> Player:
     for player in players:
