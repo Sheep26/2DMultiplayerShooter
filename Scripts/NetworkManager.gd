@@ -34,7 +34,7 @@ func _leave():
 	httpRequest.request("http://" + serverIP + "/leave?id=" + GameServer.playerID)
 
 func _sendRequest(data: String):
-	if data.begins_with("updatePlayer"):
+	if "updatePlayer" in data:
 		updatePlayerHttpRequest.request("http://" + data)
 	else:
 		httpRequest.request("http://" + data)

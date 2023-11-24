@@ -35,8 +35,9 @@ class Player:
     def getPosition(self) -> Vec2:
         return self.position
     
-    def setPosition(self, position: Vec2):
-        self.position = position
+    def setPosition(self, x: float, y: float):
+        self.position.x = x
+        self.position.y = y
     
     def setRotation(self, rotation: int):
         self.rotation = rotation

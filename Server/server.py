@@ -27,8 +27,8 @@ ip: str = config["networkSettings"]["serverIP"]
 maxPlayers: int = int(config["generalSettings"]["maxPlayers"])
 
 app = Flask(__name__)
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+#log = logging.getLogger('werkzeug')
+#log.setLevel(logging.ERROR)
 
 def getPlayerFromID(id: int) -> Player:
     for player in players:
@@ -63,6 +63,7 @@ def join():
         id += str(randint(0, 9))
     player = Player(playerName, id, request.remote_addr, map)
     player.setLastPacketTime()
+    player.setPosition(map.spawnPosition.x, map.spawnPosition.y)
     players.append(player)
     return Response(f"join:{name}:{map.path}:{map.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}", status=200)
 
