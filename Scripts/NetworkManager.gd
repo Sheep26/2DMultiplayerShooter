@@ -5,7 +5,7 @@ var isJoiningGame: bool = false
 var downloadFile: String
 @onready var httpRequest: HTTPRequest = HTTPRequest.new()
 @onready var updatePlayerHttpRequest: HTTPRequest = HTTPRequest.new()
-@onready var downloadRequest: HTTPRequest = HTTPRequest.new()
+@onready var downloadMapRequest: HTTPRequest = HTTPRequest.new()
 
 func _setup(ip: String):
 	if not httpRequest.is_inside_tree():
@@ -14,9 +14,9 @@ func _setup(ip: String):
 	if not updatePlayerHttpRequest.is_inside_tree():
 		add_child(updatePlayerHttpRequest)
 		updatePlayerHttpRequest.request_completed.connect(_request_completed)
-	if not downloadRequest.is_inside_tree():
-		add_child(downloadRequest)
-		downloadRequest.request_completed.connect(_download_completed)
+	if not downloadMapRequest.is_inside_tree():
+		add_child(downloadMapRequest)
+		downloadMapRequest.request_completed.connect(_downloadMap_completed)
 	serverIP = ip
 
 func _request_completed(_result, response_code, _headers, body):
@@ -38,7 +38,7 @@ func _request_completed(_result, response_code, _headers, body):
 	elif response_code == 400:
 		print("Either server issue or request issue")
 		
-func _download_completed(result, _response_code, _headers, body):
+func _downloadMap_completed(result, _response_code, _headers, body):
 	if result != OK:
 		print("Download failed")
 	# How to save file we have the bytes under the body arg and you can convert it to String with get_string_from_utf8()
@@ -61,4 +61,4 @@ func _sendRequest(data: String):
 		
 func _downloadMap(mapPath, savePath):
 	downloadFile = savePath
-	downloadRequest.request("http://" + serverIP + "/map?mapPath=" + mapPath)
+	downloadMapRequest.request("http://" + serverIP + "/map?mapPath=" + mapPath)

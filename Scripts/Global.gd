@@ -9,7 +9,7 @@ func _loadSettings():
 	data = JSON.parse_string(file.get_as_text())
 	file.close()
 	playerName = getConfigData()["settings"]["name"]
-	
+
 func getConfigData():
 	return data
 
