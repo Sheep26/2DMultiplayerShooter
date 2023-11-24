@@ -66,8 +66,8 @@ func _process(_delta):
 	if Global._getIsMultiplayer():
 		GameServer._sendRequest("updatePlayer?id=" + GameServer.playerID + "&x=" + str(round(position.x)) + "&y=" + str(round(position.y)) + "&rotation=" + str(round(gun.rotation)))
 
-func _notification(_notification: int):
-	if _notification == NOTIFICATION_WM_CLOSE_REQUEST:
+func _notification(_notificationID: int):
+	if _notificationID == NOTIFICATION_WM_CLOSE_REQUEST:
 		Global._handleGameQuit()
 
 func _physics_process(delta):

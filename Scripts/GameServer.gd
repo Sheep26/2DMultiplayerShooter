@@ -5,12 +5,14 @@ var serverIP: String
 var mapPath: String
 var otherPlayers: String
 var bullets: PackedScene
+var gunID: int
 var playerID: String
 
-func _setup(serverIPArg: String, mapPathArg: String, playerIDArg: String):
+func _setup(serverIPArg: String, mapPathArg: String, playerIDArg: String, gunIDArg: int):
 	self.serverIP = serverIPArg
 	self.mapPath = mapPathArg
 	self.playerID = playerIDArg
+	self.gunID = gunIDArg
 
 func _loadIntoGame():
 	NetworkManager.isJoiningGame = false

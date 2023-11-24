@@ -76,5 +76,11 @@ func _process(_delta):
 	rotate(get_angle_to(get_global_mouse_position()))
 	if Input.is_action_just_pressed("reload"):
 		currentGun._reload()
+	if Input.is_action_just_pressed("chooseGlock18"):
+		currentGun = glock18
+		GameServer._sendRequest("changeGun?id="+GameServer.playerID+"&gunID="+str(currentGun.id))
+	if Input.is_action_just_pressed("chooseAK47"):
+		currentGun = ak47
+		GameServer._sendRequest("changeGun?id="+GameServer.playerID+"&gunID="+str(currentGun.id))
 	if (Input.is_action_just_pressed("fire") or (currentGun.auto and Input.is_action_pressed("fire"))) and currentGun.ammo > 0 and currentGun.canShoot:
 		_shoot(rotationToVector2)

@@ -60,10 +60,11 @@ def join():
     player = Player(playerName, id, request.remote_addr, currentMap)
     player.setLastPacketTime()
     player.setPosition(currentMap.spawnPosition.x, currentMap.spawnPosition.y)
+    player.currentGunID = 0
     players.append(player)
     print(f"{playerName} joined the game")
     # Return the player data to the client
-    return Response(f"join:{name}:{currentMap.pathOnClient}:{currentMap.pathOnServer}:{currentMap.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}", status=200)
+    return Response(f"join:{name}:{currentMap.pathOnClient}:{currentMap.pathOnServer}:{currentMap.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}:{player.currentGunID}", status=200)
 
 @app.route("/leave")
 def leave():

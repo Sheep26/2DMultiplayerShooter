@@ -29,7 +29,7 @@ func _request_completed(_result, response_code, _headers, body):
 			isJoiningGame = true
 			var mapPathOnClient = split[2] + ":" + split[3]
 			var mapPathOnServer = split[4]
-			GameServer._setup(serverIP, mapPathOnClient, split[7])
+			GameServer._setup(serverIP, mapPathOnClient, split[7], int(split[10]))
 			if not FileAccess.file_exists(mapPathOnClient):
 				print("Downloading Map")
 				_downloadMap(mapPathOnServer, mapPathOnClient)
@@ -41,9 +41,8 @@ func _request_completed(_result, response_code, _headers, body):
 func _downloadMap_completed(result, _response_code, _headers, body):
 	if result != OK:
 		print("Download failed")
-	var dir_access = DirAccess.open("user://")
-	if not dir_access.dir_exists(Global.mapsFolder):
-		dir_access.make_dir("Maps")
+	if not DirAccess.dir_exists_absolute(Global.mapsFolder):
+		DirAccess.make_dir_absolute(Global.mapsFolder)
 	var file: FileAccess = FileAccess.open(downloadFile, FileAccess.WRITE)
 	file.store_string(body.get_string_from_utf8())
 	file.close()
