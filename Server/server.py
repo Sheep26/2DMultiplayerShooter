@@ -64,7 +64,7 @@ def join():
     players.append(player)
     print(f"{playerName} joined the game")
     # Return the player data to the client
-    return Response(f"join:{name}:{currentMap.pathOnClient}:{currentMap.pathOnServer}:{currentMap.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}:{player.currentGunID}", status=200)
+    return Response(f"{name}:{currentMap.pathOnClient}:{currentMap.pathOnServer}:{currentMap.name}:{player.name}:{player.id}:{player.position.x}:{player.position.y}:{player.currentGunID}", status=200)
 
 @app.route("/leave")
 def leave():
@@ -76,7 +76,7 @@ def leave():
         # Remove them from the game
         players.remove(player)
         print(f"{player.name} left the game")
-        return Response("leave:", status=200)
+        return Response(status=200)
     except:
         return Response(status=400)
 
@@ -90,7 +90,7 @@ def getPlayers():
     # Convert list to a string and format
     playerStr = str(returnList).replace("\'", "").replace("[", "").replace("]", "").replace(",", "\n")
     # Return that data to the client
-    return Response(f'getPlayers:{playerStr}')
+    return Response(f'{playerStr}')
 
 @app.route("/getPlayerFromID")
 def getPlayerFromIDRequest():
@@ -101,7 +101,7 @@ def getPlayerFromIDRequest():
         # Check if player id matches given id
         if player.id == id:
             # Return that player data to the client
-            Response(f"getPlayerFromID:{player.name}:{player.id}:{player.position.x}:{player.position.y}:{player.currentGunID}")
+            Response(f"{player.name}:{player.id}:{player.position.x}:{player.position.y}:{player.currentGunID}")
     return Response(status=400)
 
 @app.route("/updatePlayer")
