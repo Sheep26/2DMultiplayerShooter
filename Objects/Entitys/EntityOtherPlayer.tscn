@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dnti4s4rmcoci"]
+
+[node name="EntityOtherPlayer" type="Node2D"]
